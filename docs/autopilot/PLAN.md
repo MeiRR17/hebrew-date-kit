@@ -1,0 +1,56 @@
+# PLAN
+מטרה: לספק ספריית JavaScript קטנה, מדויקת וללא תלות חיצונית להמרות תאריכים עבריים, לחגים לפי ישראל/תפוצות ולגימטריה, עם בדיקות ותיעוד מלאים.
+
+## v1 — תשתית וחישובי לוח
+repo: MeiRR17/hebrew-date-kit
+after: none
+- [ ] צור package.json במצב ES modules עם engines של Node.js 22 ומעלה, פקודת test שמריצה node --test וללא dependencies או devDependencies.
+- [ ] ממש ב-src/calendar-core.js חישובי ימים אבסולוטיים, שנה עברית מעוברת, דחיות ראש השנה, אורכי חשוון/כסלו ואורכי חודשים; הימנע מתלות באזור זמן.
+- [ ] הוסף test/calendar-core.test.js ו-test/fixtures/calendar-anchors.json עם מקרי קצה ידועים: ראש השנה, שנים פשוטות ומעוברות ושנות לוח משתנות.
+- [ ] הוסף בדיקת קלט למספרי שנים/חודשים/ימים לא תקינים ותיעוד JSDoc לכל export מהמודול.
+Done when: קיימים package.json, src/calendar-core.js, test/calendar-core.test.js ו-fixture; הפקודה node --test test/calendar-core.test.js עוברת ללא npm install או תלות חיצונית.
+
+## v2 — המרת תאריכים דו-כיוונית
+repo: MeiRR17/hebrew-date-kit
+after: v1
+- [ ] ממש ב-src/dates.js פונקציות מתועדות toHebrew({year,month,day}) ו-toGregorian({year,month,day}) על בסיס calendar-core, עם אימות תאריכים וטיפול בשנים מעוברות.
+- [ ] הגדר החזרה עקבית של {year,month,day} במספור חודשים עבריים מניסן=1 עד אדר ב׳=13 בשנה מעוברת, וייצוג שמות חודשים לפי הצורך; אל תסתמך על timezone מקומי.
+- [ ] צור test/fixtures/date-pairs.json הכולל זוגות תאריכים מאומתים מתקופות ושנים רבות, לרבות אדר א׳/ב׳, תחילת תשרי, סוף אלול ושנים גרגוריאניות מעוברות.
+- [ ] הוסף test/dates.test.js לבדיקת שני הכיוונים, round-trip, ולשגיאות על תאריכים שאינם קיימים.
+Done when: node --test test/dates.test.js עובר לכל זוגות התאריכים בקובץ ה-fixtures, וכל תאריך תקין שנבדק חוזר לעצמו בהמרה הלוך ושוב.
+
+## v3 — מספרים עבריים וגימטריה
+repo: MeiRR17/hebrew-date-kit
+after: v1
+- [ ] ממש ב-src/numerals.js פונקציות מתועדות formatHebrewNumber(number) ו-formatHebrewYear(year), ללא חבילות חיצוניות.
+- [ ] תמוך בסימני גרש/גרשיים תקניים, בצורות ט״ו/ט״ז, במאות, באלפים ובקיצור אלפי השנים בתאריך עברי, כך ש-formatHebrewYear(5787) מחזיר תשפ״ז.
+- [ ] הוסף test/numerals.test.js למספרים קטנים וגדולים, לשנים עבריות, לקלט לא תקין ולכתיב הכולל סימני פיסוק.
+Done when: node --test test/numerals.test.js עובר ו-formatHebrewYear(5787) מחזיר בדיוק תשפ״ז.
+
+## v4 — חגים בישראל ובתפוצות
+repo: MeiRR17/hebrew-date-kit
+after: v2
+- [ ] ממש ב-src/holidays.js פונקציה מתועדת getJewishHolidays(hebrewYear, {region}) המחזירה רשימה ממוינת של מזהה חג, שם, סוג ותאריך עברי/גרגוריאני; region הוא israel או diaspora בלבד.
+- [ ] כלול מועדי התורה, ראש השנה ויום כיפור, סוכות/שמיני עצרת/שמחת תורה, פסח, שבועות, חנוכה, פורים, תעניות וימי ציון מסורתיים נפוצים; בצע דחיית צומות לפי כללי הלוח.
+- [ ] הבדל במפורש בין ימי חג בישראל ובתפוצות, כולל יום טוב שני של גלויות, אורך פסח/שבועות ומועד שמחת תורה, וכן פורים באדר ב׳ בשנה מעוברת.
+- [ ] הוסף test/holidays.test.js ו-test/fixtures/holiday-cases.json עם תאריכים צפויים ואימות הבדלי אזורים, שנים מעוברות ודחיות.
+Done when: node --test test/holidays.test.js עובר, ולפחות פסח, שבועות ושמחת תורה מציגים הבדלים נכונים בין israel ל-diaspora בשנות הבדיקה.
+
+## v5 — ממשק ציבורי ופרסום
+repo: MeiRR17/hebrew-date-kit
+after: v2, v3, v4
+- [ ] צור src/index.js עם ייצוא API ציבורי מצומצם ו-JSDoc לכל export, וחבר את package.json לשימוש ב-import כ-ES module ללא CLI.
+- [ ] כתוב README.md מלא באנגלית: שם, משפט תיאור, מוטיבציה, תכונות, quick start, שימוש, הרצת בדיקות, מבנה הפרויקט, וסעיף Author אחרון בנוסח המדויק שב-BRIEF.
+- [ ] צור LICENSE בתנאי MIT עם copyright 2026 Meir Dvir.
+- [ ] צור examples/date-conversion.mjs, examples/holidays.mjs ו-examples/numerals.mjs, שכל אחד רץ עם node בלבד ומדגים את ממשק הספרייה.
+- [ ] ודא ש-package.json אינו כולל bin, npm dependencies או devDependencies ושהתיעוד מתאר רק יכולות ממומשות.
+Done when: כל שלוש הדוגמאות רצות ב-node 22+, import של src/index.js מצליח, README מכיל את הסעיפים שנדרשו ו-LICENSE הוא MIT עם ייחוס 2026.
+
+## v6 — אימות אינטגרציה וסגירת מוצר
+repo: MeiRR17/hebrew-date-kit
+after: v5
+- [ ] הוסף test/fixtures/acceptance-pairs.json ו-test/acceptance.test.js עם טבלת אימות בלתי תלויה המשתרעת על עשרות שנים, כולל שנים עבריות וגרגוריאניות מעוברות.
+- [ ] הוסף .github/workflows/ci.yml המריץ את בדיקות node --test ב-Node.js 22 בענף autopilot בלי התקנת חבילות.
+- [ ] בדוק שהמרות, חגים וגימטריה עובדים יחד, שמקרי קצה נשמרים, ושאותן בדיקות אינן תלויות באזור הזמן של המחשב.
+- [ ] סקור את המוצר הסופי: JSDoc לכל export, תיעוד תואם לקוד, אפס תלויות, אפס סודות, ללא placeholders וללא נכסים או צילומי מסך מומצאים; תקן רק ממצאים ממשיים.
+Done when: node --test עובר מקומית, בדיקת GitHub Actions ב-autopilot ירוקה, כל הדוגמאות רצות והמאגר עומד ברשימת דרישות BRIEF.md.
