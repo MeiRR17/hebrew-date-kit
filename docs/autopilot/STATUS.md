@@ -75,9 +75,10 @@
 - מיזוג: commit 5e94d1ed0e1b60726e227448c379f29e20c29d56 נבדק ונמצא ב-main וב-autopilot; npm publish לא בוצע.
 
 ## v1.4.0 — רשת חודש עברי משולבת חגים
-- מצב: מימוש הוכן לענף autopilot; עדיין דרוש אימות CI לפני מיזוג.
+- מצב: גרסה 1.4.0 הושלמה, אומתה ונכללה ב-main באמצעות Fast-forward.
 - נוסף src/month-calendar.js עם getHebrewMonthCalendar; שבועות בני 7 תאים עם null מחוץ לחודש, תאריכים עבריים/גרגוריאניים וימי שבוע.
 - הממשק תומך בהבדלי חגי ישראל/תפוצות, שמות בשתי שפות, בחירת יום תחילת שבוע, מועדים חופפים, ואדר א׳/ב׳.
 - נוסף test/month-calendar.test.js עם 10 בדיקות ייעודיות, דוגמת examples/month-calendar.mjs, README ו-API (11 פונקציות) מעודכנים.
-- package.json 1.4.0; אין dependencies. נותר CI ירוק ומיזוג בטוח ל-main.
+- package.json 1.4.0; אין dependencies. GitHub Actions run 43466737501 עבר 4/4 עבודות ב-Node.js 22, עם 73/73 בדיקות בכל אזור זמן; כל דוגמאות השימוש עברו.
+- מיזוג: commit 1204f4ff00f55e3103399ee5b94b7c6c9079d9a7 אומת ב-main וב-autopilot; לא בוצע npm publish.
 
