@@ -23,11 +23,11 @@ Done when: node --test test/dates.test.js עובר לכל זוגות התארי�
 
 ## v3 — מספרים עבריים וגימטריה
 repo: MeiRR17/hebrew-date-kit
-after: v1
-- [ ] ממש ב-src/numerals.js פונקציות מתועדות formatHebrewNumber(number) ו-formatHebrewYear(year), ללא חבילות חיצוניות.
+after: none
+- [ ] ממש ב-src/numerals.mjs פונקציות מתועדות formatHebrewNumber(number) ו-formatHebrewYear(year), ללא חבילות חיצוניות.
 - [ ] תמוך בסימני גרש/גרשיים תקניים, בצורות ט״ו/ט״ז, במאות, באלפים ובקיצור אלפי השנים בתאריך עברי, כך ש-formatHebrewYear(5787) מחזיר תשפ״ז.
-- [ ] הוסף test/numerals.test.js למספרים קטנים וגדולים, לשנים עבריות, לקלט לא תקין ולכתיב הכולל סימני פיסוק.
-Done when: node --test test/numerals.test.js עובר ו-formatHebrewYear(5787) מחזיר בדיוק תשפ״ז.
+- [ ] הוסף test/numerals.test.mjs למספרים קטנים וגדולים, לשנים עבריות, לקלט לא תקין ולכתיב הכולל סימני פיסוק; השתמש בסיומת .mjs כדי שהבדיקות ירוצו לפני ש-v1 יוצרת package.json.
+Done when: node --test test/numerals.test.mjs עובר גם לפני יצירת package.json, ללא npm install; formatHebrewYear(5787) מחזיר בדיוק תשפ״ז.
 
 ## v4 — חגים בישראל ובתפוצות
 repo: MeiRR17/hebrew-date-kit
@@ -43,7 +43,7 @@ Done when: node --test test/holidays.test.js עובר, ולפחות פסח, שב
 ## v5 — ממשק ציבורי ופרסום
 repo: MeiRR17/hebrew-date-kit
 after: v2, v3, v4
-- [ ] צור src/index.js עם ייצוא API ציבורי מצומצם ו-JSDoc לכל export, וחבר את package.json לשימוש ב-import כ-ES module ללא CLI.
+- [ ] צור src/index.js עם ייצוא API ציבורי מצומצם ו-JSDoc לכל export (לרבות src/numerals.mjs), וחבר את package.json לשימוש ב-import כ-ES module ללא CLI.
 - [ ] כתוב README.md מלא באנגלית: שם, משפט תיאור, מוטיבציה, תכונות, quick start, שימוש, הרצת בדיקות, מבנה הפרויקט, וסעיף Author אחרון בנוסח המדויק שב-BRIEF.
 - [ ] צור LICENSE בתנאי MIT עם copyright 2026 Meir Dvir.
 - [ ] צור examples/date-conversion.mjs, examples/holidays.mjs ו-examples/numerals.mjs, שכל אחד רץ עם node בלבד ומדגים את ממשק הספרייה.
