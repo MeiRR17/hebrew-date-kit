@@ -15,17 +15,52 @@ import {
 const LAST_GREGORIAN_DAY = gregorianToAbsolute({year: 9999, month: 12, day: 31});
 const SATURDAY = 6; // Absolute day 1 = Monday, therefore Saturday is remainder 6.
 
+const HEBREW_EVENT_NAMES = Object.freeze({
+  rosh_hashanah: 'ראש השנה',
+  fast_of_gedaliah: 'צום גדליה',
+  yom_kippur: 'יום הכיפורים',
+  sukkot: 'סוכות',
+  hoshana_rabbah: 'הושענא רבה',
+  shemini_atzeret: 'שמיני עצרת',
+  simchat_torah: 'שמחת תורה',
+  hanukkah: 'חנוכה',
+  tenth_of_tevet: 'עשרה בטבת',
+  tu_bishvat: 'ט״ו בשבט',
+  purim_katan: 'פורים קטן',
+  shushan_purim_katan: 'שושן פורים קטן',
+  fast_of_esther: 'תענית אסתר',
+  purim: 'פורים',
+  shushan_purim: 'שושן פורים',
+  pesach: 'פסח',
+  pesach_sheni: 'פסח שני',
+  lag_baomer: 'ל״ג בעומר',
+  shavuot: 'שבועות',
+  seventeenth_of_tammuz: 'שבעה עשר בתמוז',
+  tisha_bav: 'תשעה באב',
+  tu_bav: 'ט״ו באב',
+});
+
+function hebrewHolidayName(id, type) {
+  if (id === 'sukkot' && type === 'chol_hamoed') return 'חול המועד סוכות';
+  if (id === 'pesach' && type === 'chol_hamoed') return 'חול המועד פסח';
+  const name = HEBREW_EVENT_NAMES[id];
+  if (name === undefined) throw new Error('Missing Hebrew holiday name for ' + id);
+  return name;
+}
+
 /**
  * Return a chronologically sorted collection of Jewish holidays.
  *
  * Each event has {id, name, type, hebrewDate, gregorianDate, absoluteDay},
  * optionally dayOfFestival. Types are yom_tov, chol_hamoed, fast, observance.
+ * The optional locale is 'en' (default) or 'he' for Hebrew display names.
+ * The event ID, dates, type, order, and optional dayOfFestival are unchanged.
  * Different observances on the same date are retained; duplicate event IDs
  * on the same absolute day are eliminated. All dates must be representable
  * in the proleptic Gregorian calendar years 1 through 9999.
  *
  * @param {number} hebrewYear Hebrew calendar year, integer, wholly representable in Gregorian years 1..9999.
- * @param {{region:'israel'|'diaspora'}} options Required region selector.
+ * @param {{region:'israel'|'diaspora',locale?:'en'|'he'}} options Required region and optional display language.
  * @returns {Array<{id:string,name:string,type:string,hebrewDate:object,gregorianDate:object,absoluteDay:number,dayOfFestival?:number}>} Events sorted by absolute day.
  * @throws {TypeError|RangeError} Invalid input or unsupported calendar range.
  */
@@ -33,9 +68,12 @@ export function getJewishHolidays(hebrewYear, options) {
   if (options === null || typeof options !== 'object' || Array.isArray(options)) {
     throw new TypeError('options must be an object containing region');
   }
-  const {region} = options;
+  const {region, locale = 'en'} = options;
   if (region !== 'israel' && region !== 'diaspora') {
     throw new RangeError('region must be either israel or diaspora');
+  }
+  if (locale !== 'en' && locale !== 'he') {
+    throw new RangeError('locale must be either en or he');
   }
   if (!Number.isSafeInteger(hebrewYear) || hebrewYear < 1 || hebrewYear > 20000) {
     throw new RangeError('hebrewYear must be an integer between 1 and 20000');
@@ -54,7 +92,7 @@ export function getJewishHolidays(hebrewYear, options) {
     if (seen.has(key)) return;
     seen.add(key);
     const event = {
-      id, name, type,
+      id, name: locale === 'he' ? hebrewHolidayName(id, type) : name, type,
       hebrewDate: absoluteToHebrew(absoluteDay),
       gregorianDate: absoluteToGregorian(absoluteDay),
       absoluteDay,

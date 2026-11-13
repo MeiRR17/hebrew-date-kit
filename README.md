@@ -12,7 +12,7 @@ Date conversion and holiday rules often get mixed with timezone-sensitive `Date`
 
 - Convert Gregorian dates to Hebrew dates and back (`toHebrew`, `toGregorian`).
 - Handle Hebrew leap years, Adar I/II, Gregorian leap days, and Hebrew year boundaries.
-- List traditional holidays and observances for a Hebrew year (`getJewishHolidays`), including regional differences for Pesach, Shavuot, and Simchat Torah and postponements of traditional fasts.
+- List traditional holidays and observances for a Hebrew year (`getJewishHolidays`), including regional differences for Pesach, Shavuot, and Simchat Torah, postponements of traditional fasts, and optional Hebrew event names (`locale: 'he'`).
 - Format positive integers and Hebrew years with geresh/gershayim and the special forms for 15 and 16 (`formatHebrewNumber`, `formatHebrewYear`).
 - Run offline, with no runtime or development npm dependencies.
 
@@ -50,6 +50,8 @@ toGregorian({ year: 5784, month: 13, day: 14 });
 
 const israel = getJewishHolidays(5787, { region: 'israel' });
 const diaspora = getJewishHolidays(5787, { region: 'diaspora' });
+const hebrewNames = getJewishHolidays(5787, { region: 'israel', locale: 'he' });
+// hebrewNames[0].name === 'ראש השנה'
 const simchatTorahInIsrael = israel.find(event => event.id === 'simchat_torah');
 // simchatTorahInIsrael.hebrewDate = { year: 5787, month: 7, day: 22 }
 
@@ -63,7 +65,7 @@ formatHebrewYear(5787); // 'תשפ״ז'
 - All inputs and outputs are **plain `{ year, month, day }` records**: no `Date` objects, times, local time zones, or UTC offsets. The library labels civil calendar days; it **does not calculate sunset** or decide which Hebrew day a particular local timestamp falls in.
 - Gregorian month numbers are January=1 through December=12, using the proleptic Gregorian calendar (years 1–9999). Hebrew month numbers start at Nisan=1, so Tishrei=7, Adar=12, and Adar II=13 only in leap years. Months are returned as numbers, not translated month names.
 - An absolute day is an integer with Gregorian **0001-01-01 = 1**. The two public conversion functions reject impossible dates. Hebrew-to-Gregorian conversion requires a representable Gregorian date in years 1–9999.
-- `getJewishHolidays(year, { region })` requires `region` to be exactly `'israel'` or `'diaspora'`. It returns chronologically sorted events with `id`, `name`, `type`, `hebrewDate`, `gregorianDate`, and `absoluteDay`; multi-day festivals also have `dayOfFestival`. The entire requested Hebrew year must be within the supported Gregorian range.
+- `getJewishHolidays(year, { region, locale })` requires `region` to be exactly `'israel'` or `'diaspora'`; optional `locale` is `'en'` (default) or `'he'` for Hebrew display names. Only `name` is localized; identifiers, date fields, event types, and sorting are identical. It returns chronologically sorted events with `id`, `name`, `type`, `hebrewDate`, `gregorianDate`, and `absoluteDay`; multi-day festivals also have `dayOfFestival`. The entire requested Hebrew year must be within the supported Gregorian range.
 - This list represents selected traditional observances, **not** a comprehensive halachic calendar or a source of religious rulings. Modern state holidays and location-based times are not included.
 - Hebrew numerals use traditional punctuation. `formatHebrewNumber(5787)` preserves the thousands prefix, whereas `formatHebrewYear(5787)` omits it. The supported input range for these functions is 1–999999.
 
