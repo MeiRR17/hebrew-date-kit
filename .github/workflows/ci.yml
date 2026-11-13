@@ -1,0 +1,36 @@
+name: Node.js 22 CI
+
+on:
+  push:
+    branches: [autopilot]
+  pull_request:
+    branches: [main, autopilot]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Node 22 / ${{ matrix.timezone }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        timezone: [UTC, Asia/Jerusalem, America/Los_Angeles, Pacific/Auckland]
+    env:
+      TZ: ${{ matrix.timezone }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run unit and acceptance tests (no npm install)
+        run: node --test
+      - name: Run all library examples
+        run: |
+          node examples/date-conversion.mjs
+          node examples/holidays.mjs
+          node examples/numerals.mjs
