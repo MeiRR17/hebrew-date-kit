@@ -83,11 +83,11 @@
 - מיזוג: commit 1204f4ff00f55e3103399ee5b94b7c6c9079d9a7 אומת ב-main וב-autopilot; לא בוצע npm publish.
 
 ## v1.5.0 — ייצוא חגים ל-iCalendar (.ics)
-- מצב: המימוש והבדיקות עברו; ממתין רק לאימות CI של commit התיעוד ולמיזוג ל-main.
+- מצב: גרסה 1.5.0 הושלמה, אומתה ומוזגה ל-main ב-Fast-forward.
 - נוסף src/icalendar.js עם exportJewishHolidaysIcs, ייצוא UTF-8 לפי RFC 5545, כולל UID יציב, DTSTART של יום אזרחי, DTSTAMP ואירועי חג חופפים.
 - שמות בעברית/אנגלית, ישראל/תפוצות, קיפול שורות UTF-8 ומניעת הזרקת שדות באמצעות אימות אפשרויות וקידוד TEXT.
 - נוסף test/icalendar.test.js עם 7 בדיקות, examples/export-ics.mjs, README, CI ודוגמת שימוש, API בן 12 פונקציות ו-package.json 1.5.0.
 - מגבלות: קובצי .ics הם לימים אזרחיים שלמים, ללא זמן שקיעה או זמנים הלכתיים. אין npm publish.
 - CI: GitHub Actions run 43469545418 עבר 4/4 עבודות ב-Node.js 22, עם 80/80 בדיקות בכל אזור זמן, ללא כישלונות; כל דוגמאות השימוש, כולל export-ics.mjs, עברו.
-- נותר: לאמת CI על commit התיעוד ולבצע מיזוג Fast-forward ל-main. npm publish לא בוצע.
+- אימות סופי: run 43469887316 עבר 4/4 עבודות, עם 80/80 בדיקות בכל סביבת CI; המיזוג ל-main בוצע ב-commit de7a363c39a00151132c358d7b4df79f59af1ccb. לא בוצע npm publish.
 
