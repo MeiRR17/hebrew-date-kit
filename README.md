@@ -15,6 +15,7 @@ Date conversion and holiday rules often get mixed with timezone-sensitive `Date`
 - List traditional holidays and observances for a Hebrew year (`getJewishHolidays`), including regional differences for Pesach, Shavuot, and Simchat Torah, postponements of traditional fasts, and optional Hebrew event names (`locale: 'he'`).
 - Format positive integers and Hebrew years with geresh/gershayim and the special forms for 15 and 16 (`formatHebrewNumber`, `formatHebrewYear`).
 - Get Hebrew month names in English or Hebrew and format complete Hebrew civil dates, including Adar I/II (`getHebrewMonthName`, `formatHebrewDate`).
+- Add or subtract days, calculate signed day differences, and find Hebrew weekdays without timezones (`addHebrewDays`, `daysBetweenHebrewDates`, `getHebrewWeekday`).
 - Run offline, with no runtime or development npm dependencies.
 
 ## Quick start
@@ -42,6 +43,9 @@ import {
   formatHebrewYear,
   getHebrewMonthName,
   formatHebrewDate,
+  addHebrewDays,
+  daysBetweenHebrewDates,
+  getHebrewWeekday,
 } from 'hebrew-date-kit';
 
 // January=1 for Gregorian months; Nisan=1, Tishrei=7 for Hebrew months.
@@ -67,6 +71,14 @@ formatHebrewDate({ year: 5784, month: 13, day: 14 });
 // 'י״ד באדר ב׳ תשפ״ד'
 formatHebrewDate({ year: 5784, month: 13, day: 14 }, { locale: 'en' });
 // '14 Adar II 5784'
+
+// Integer-only Hebrew date arithmetic; weekdays: Sunday=0 ... Shabbat=6
+const roshHashanah = { year: 5787, month: 7, day: 1 };
+addHebrewDays(roshHashanah, -1); // { year: 5786, month: 6, day: 29 }
+addHebrewDays({ year: 5784, month: 12, day: 30 }, 1);
+// { year: 5784, month: 13, day: 1 } (Adar I → Adar II)
+daysBetweenHebrewDates({ year: 5786, month: 6, day: 29 }, roshHashanah); // 1
+getHebrewWeekday(roshHashanah); // 6 (Shabbat)
 ```
 
 ### Calendar conventions and limits
@@ -78,6 +90,7 @@ formatHebrewDate({ year: 5784, month: 13, day: 14 }, { locale: 'en' });
 - This list represents selected traditional observances, **not** a comprehensive halachic calendar or a source of religious rulings. Modern state holidays and location-based times are not included.
 - Hebrew numerals use traditional punctuation. `formatHebrewNumber(5787)` preserves the thousands prefix, whereas `formatHebrewYear(5787)` omits it. The supported input range for these functions is 1–999999.
 - `getHebrewMonthName(year, month, {locale})` uses English by default; `formatHebrewDate({year,month,day}, {locale})` uses Hebrew by default. Both accept `locale: 'en' | 'he'`. Date formatting validates the complete date, including variable Hebrew month lengths. These are display functions only; they do not parse text or calculate sunset.
+- `addHebrewDays(date, days)` accepts signed safe integers, including zero; the result must remain within Hebrew calendar years 1–20000 (the full Hebrew date-arithmetic range, not limited to Gregorian years 1–9999). `daysBetweenHebrewDates(start, end)` returns *end minus start*. `getHebrewWeekday(date)` returns Sunday=0, Monday=1, ..., Saturday/Shabbat=6. Arithmetic uses only integer absolute days and does not mutate input records.
 
 ## Run tests
 
@@ -94,6 +107,7 @@ Fixtures under `test/fixtures/` contain independent calendar anchors, date pairs
 ```text
 src/
   calendar-core.js    # Fixed Hebrew/Gregorian calendar arithmetic
+  arithmetic.js       # Day shifts, date differences and weekdays
   dates.js            # Date conversion functions
   format.js           # Month names and formatted Hebrew dates
   holidays.js         # Regional holiday and fast-day rules

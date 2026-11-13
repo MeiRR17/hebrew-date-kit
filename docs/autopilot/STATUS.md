@@ -66,3 +66,10 @@
 - CI מאומת: run 43458227200 עבר בכל 4 אזורי הזמן, עם 54/54 בדיקות בכל סביבת CI; שלוש דוגמאות עברו.
 - מיזוג: commit ea7e6705979d4e2c20f4722b0fdbf914c3ea94c1 אומת ב-main וב-autopilot לאחר CI ירוק; npm publish לא בוצע.
 
+## v1.3.0 — חישובי תאריכים עבריים וימי השבוע
+- מצב: מימוש חדש ב-autopilot; ממתין לאימות GitHub Actions לפני מיזוג.
+- נוסף src/arithmetic.js עם addHebrewDays(date, days), daysBetweenHebrewDates(start,end), getHebrewWeekday(date).
+- חשבון ימים אבסולוטיים, ללא timezone; תמיכה בשנים עבריות 1–20000, מעברי שנים וחודשים, החזרת יום שבוע 0=Sunday ועד 6=Shabbat.
+- נוסף test/date-arithmetic.test.js עם 9 בדיקות; API ציבורי בן 10 פונקציות; README ודוגמה עודכנו; package.json 1.3.0.
+- נותר: אימות CI ומיזוג ל-main כאשר יציב. לא בוצע npm publish.
+

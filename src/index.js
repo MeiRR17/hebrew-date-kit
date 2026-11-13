@@ -50,3 +50,21 @@ export { getHebrewMonthName } from './format.js';
  * @see {@link ./format.js}
  */
 export { formatHebrewDate } from './format.js';
+
+/**
+ * Advance or rewind a Hebrew civil date by a signed number of whole days.
+ * @see {@link ./arithmetic.js}
+ */
+export { addHebrewDays } from './arithmetic.js';
+
+/**
+ * Return the signed number of days from one Hebrew civil date to another.
+ * @see {@link ./arithmetic.js}
+ */
+export { daysBetweenHebrewDates } from './arithmetic.js';
+
+/**
+ * Return the weekday of a Hebrew civil date, Sunday=0 through Shabbat=6.
+ * @see {@link ./arithmetic.js}
+ */
+export { getHebrewWeekday } from './arithmetic.js';
