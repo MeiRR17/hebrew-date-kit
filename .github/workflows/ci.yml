@@ -22,11 +22,14 @@ jobs:
       TZ: ${{ matrix.timezone }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - name: Set up Node.js 22
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
+          package-manager-cache: false
       - name: Run unit and acceptance tests (no npm install)
         run: node --test
       - name: Run all library examples

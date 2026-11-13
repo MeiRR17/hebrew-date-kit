@@ -1,6 +1,6 @@
 {
   "name": "hebrew-date-kit",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "Zero-dependency Hebrew calendar dates, holidays, and numerals for Node.js",
   "type": "module",
   "main": "./src/index.js",

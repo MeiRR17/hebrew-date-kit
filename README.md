@@ -18,10 +18,10 @@ Date conversion and holiday rules often get mixed with timezone-sensitive `Date`
 
 ## Quick start
 
-Requires **Node.js 22 or newer**. To run directly from the repository's development branch:
+Requires **Node.js 22 or newer**. Clone the repository and run the examples directly:
 
 ```sh
-git clone --branch autopilot https://github.com/MeiRR17/hebrew-date-kit.git
+git clone https://github.com/MeiRR17/hebrew-date-kit.git
 cd hebrew-date-kit
 node examples/date-conversion.mjs
 node examples/holidays.mjs
