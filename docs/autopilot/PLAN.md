@@ -24,9 +24,9 @@ Done when: node --test test/dates.test.js עובר לכל זוגות התארי�
 ## v3 — מספרים עבריים וגימטריה
 repo: MeiRR17/hebrew-date-kit
 after: none
-- [ ] ממש ב-src/numerals.mjs פונקציות מתועדות formatHebrewNumber(number) ו-formatHebrewYear(year), ללא חבילות חיצוניות.
-- [ ] תמוך בסימני גרש/גרשיים תקניים, בצורות ט״ו/ט״ז, במאות, באלפים ובקיצור אלפי השנים בתאריך עברי, כך ש-formatHebrewYear(5787) מחזיר תשפ״ז.
-- [ ] הוסף test/numerals.test.mjs למספרים קטנים וגדולים, לשנים עבריות, לקלט לא תקין ולכתיב הכולל סימני פיסוק; השתמש בסיומת .mjs כדי שהבדיקות ירוצו לפני ש-v1 יוצרת package.json.
+- [x] ממש ב-src/numerals.mjs פונקציות מתועדות formatHebrewNumber(number) ו-formatHebrewYear(year), ללא חבילות חיצוניות.
+- [x] תמוך בסימני גרש/גרשיים תקניים, בצורות ט״ו/ט״ז, במאות, באלפים ובקיצור אלפי השנים בתאריך עברי, כך ש-formatHebrewYear(5787) מחזיר תשפ״ז.
+- [x] הוסף test/numerals.test.mjs למספרים קטנים וגדולים, לשנים עבריות, לקלט לא תקין ולכתיב הכולל סימני פיסוק; השתמש בסיומת .mjs כדי שהבדיקות ירוצו לפני ש-v1 יוצרת package.json.
 Done when: node --test test/numerals.test.mjs עובר גם לפני יצירת package.json, ללא npm install; formatHebrewYear(5787) מחזיר בדיוק תשפ״ז.
 
 ## v4 — חגים בישראל ובתפוצות
