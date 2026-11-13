@@ -1,0 +1,1592 @@
+{
+  "provenance": "Independent date pairs from pyluach 2.3.0 Gregorian/Hebrew conversions and Python datetime.date.toordinal",
+  "calendarConvention": "Proleptic Gregorian, civil dates with no time; Hebrew months Nisan=1, Tishrei=7, Adar II=13",
+  "pairs": [
+    {
+      "gregorian": {
+        "year": 1,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 3761,
+        "month": 10,
+        "day": 18
+      },
+      "absoluteDay": 1
+    },
+    {
+      "gregorian": {
+        "year": 1,
+        "month": 6,
+        "day": 15
+      },
+      "hebrew": {
+        "year": 3761,
+        "month": 4,
+        "day": 6
+      },
+      "absoluteDay": 166
+    },
+    {
+      "gregorian": {
+        "year": 1,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 3762,
+        "month": 10,
+        "day": 29
+      },
+      "absoluteDay": 365
+    },
+    {
+      "gregorian": {
+        "year": 4,
+        "month": 2,
+        "day": 29
+      },
+      "hebrew": {
+        "year": 3764,
+        "month": 12,
+        "day": 21
+      },
+      "absoluteDay": 1155
+    },
+    {
+      "gregorian": {
+        "year": 734,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 4494,
+        "month": 10,
+        "day": 16
+      },
+      "absoluteDay": 267723
+    },
+    {
+      "gregorian": {
+        "year": 734,
+        "month": 6,
+        "day": 15
+      },
+      "hebrew": {
+        "year": 4494,
+        "month": 4,
+        "day": 4
+      },
+      "absoluteDay": 267888
+    },
+    {
+      "gregorian": {
+        "year": 734,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 4495,
+        "month": 10,
+        "day": 27
+      },
+      "absoluteDay": 268087
+    },
+    {
+      "gregorian": {
+        "year": 1467,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5227,
+        "month": 10,
+        "day": 15
+      },
+      "absoluteDay": 535446
+    },
+    {
+      "gregorian": {
+        "year": 1467,
+        "month": 6,
+        "day": 15
+      },
+      "hebrew": {
+        "year": 5227,
+        "month": 4,
+        "day": 3
+      },
+      "absoluteDay": 535611
+    },
+    {
+      "gregorian": {
+        "year": 1467,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 5228,
+        "month": 10,
+        "day": 26
+      },
+      "absoluteDay": 535810
+    },
+    {
+      "gregorian": {
+        "year": 1582,
+        "month": 10,
+        "day": 4
+      },
+      "hebrew": {
+        "year": 5343,
+        "month": 7,
+        "day": 8
+      },
+      "absoluteDay": 577725
+    },
+    {
+      "gregorian": {
+        "year": 1582,
+        "month": 10,
+        "day": 15
+      },
+      "hebrew": {
+        "year": 5343,
+        "month": 7,
+        "day": 19
+      },
+      "absoluteDay": 577736
+    },
+    {
+      "gregorian": {
+        "year": 1700,
+        "month": 2,
+        "day": 28
+      },
+      "hebrew": {
+        "year": 5460,
+        "month": 12,
+        "day": 9
+      },
+      "absoluteDay": 620606
+    },
+    {
+      "gregorian": {
+        "year": 1700,
+        "month": 3,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5460,
+        "month": 12,
+        "day": 10
+      },
+      "absoluteDay": 620607
+    },
+    {
+      "gregorian": {
+        "year": 1859,
+        "month": 9,
+        "day": 29
+      },
+      "hebrew": {
+        "year": 5620,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 678892
+    },
+    {
+      "gregorian": {
+        "year": 1900,
+        "month": 2,
+        "day": 28
+      },
+      "hebrew": {
+        "year": 5660,
+        "month": 12,
+        "day": 29
+      },
+      "absoluteDay": 693654
+    },
+    {
+      "gregorian": {
+        "year": 1900,
+        "month": 3,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5660,
+        "month": 12,
+        "day": 30
+      },
+      "absoluteDay": 693655
+    },
+    {
+      "gregorian": {
+        "year": 1927,
+        "month": 9,
+        "day": 27
+      },
+      "hebrew": {
+        "year": 5688,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 703726
+    },
+    {
+      "gregorian": {
+        "year": 2000,
+        "month": 2,
+        "day": 29
+      },
+      "hebrew": {
+        "year": 5760,
+        "month": 12,
+        "day": 23
+      },
+      "absoluteDay": 730179
+    },
+    {
+      "gregorian": {
+        "year": 2000,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 5761,
+        "month": 10,
+        "day": 5
+      },
+      "absoluteDay": 730485
+    },
+    {
+      "gregorian": {
+        "year": 2001,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5761,
+        "month": 10,
+        "day": 6
+      },
+      "absoluteDay": 730486
+    },
+    {
+      "gregorian": {
+        "year": 2005,
+        "month": 10,
+        "day": 4
+      },
+      "hebrew": {
+        "year": 5766,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 732223
+    },
+    {
+      "gregorian": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5770,
+        "month": 10,
+        "day": 15
+      },
+      "absoluteDay": 733773
+    },
+    {
+      "gregorian": {
+        "year": 2010,
+        "month": 7,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5770,
+        "month": 4,
+        "day": 19
+      },
+      "absoluteDay": 733954
+    },
+    {
+      "gregorian": {
+        "year": 2010,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 5771,
+        "month": 10,
+        "day": 24
+      },
+      "absoluteDay": 734137
+    },
+    {
+      "gregorian": {
+        "year": 2015,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5775,
+        "month": 10,
+        "day": 10
+      },
+      "absoluteDay": 735599
+    },
+    {
+      "gregorian": {
+        "year": 2015,
+        "month": 7,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5775,
+        "month": 4,
+        "day": 14
+      },
+      "absoluteDay": 735780
+    },
+    {
+      "gregorian": {
+        "year": 2015,
+        "month": 9,
+        "day": 14
+      },
+      "hebrew": {
+        "year": 5776,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 735855
+    },
+    {
+      "gregorian": {
+        "year": 2015,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 5776,
+        "month": 10,
+        "day": 19
+      },
+      "absoluteDay": 735963
+    },
+    {
+      "gregorian": {
+        "year": 2016,
+        "month": 10,
+        "day": 3
+      },
+      "hebrew": {
+        "year": 5777,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 736240
+    },
+    {
+      "gregorian": {
+        "year": 2016,
+        "month": 11,
+        "day": 30
+      },
+      "hebrew": {
+        "year": 5777,
+        "month": 8,
+        "day": 29
+      },
+      "absoluteDay": 736298
+    },
+    {
+      "gregorian": {
+        "year": 2018,
+        "month": 9,
+        "day": 10
+      },
+      "hebrew": {
+        "year": 5779,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 736947
+    },
+    {
+      "gregorian": {
+        "year": 2019,
+        "month": 9,
+        "day": 30
+      },
+      "hebrew": {
+        "year": 5780,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 737332
+    },
+    {
+      "gregorian": {
+        "year": 2020,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5780,
+        "month": 10,
+        "day": 4
+      },
+      "absoluteDay": 737425
+    },
+    {
+      "gregorian": {
+        "year": 2020,
+        "month": 7,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5780,
+        "month": 4,
+        "day": 9
+      },
+      "absoluteDay": 737607
+    },
+    {
+      "gregorian": {
+        "year": 2020,
+        "month": 9,
+        "day": 19
+      },
+      "hebrew": {
+        "year": 5781,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 737687
+    },
+    {
+      "gregorian": {
+        "year": 2020,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 5781,
+        "month": 10,
+        "day": 16
+      },
+      "absoluteDay": 737790
+    },
+    {
+      "gregorian": {
+        "year": 2021,
+        "month": 9,
+        "day": 7
+      },
+      "hebrew": {
+        "year": 5782,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 738040
+    },
+    {
+      "gregorian": {
+        "year": 2022,
+        "month": 3,
+        "day": 3
+      },
+      "hebrew": {
+        "year": 5782,
+        "month": 12,
+        "day": 30
+      },
+      "absoluteDay": 738217
+    },
+    {
+      "gregorian": {
+        "year": 2022,
+        "month": 3,
+        "day": 4
+      },
+      "hebrew": {
+        "year": 5782,
+        "month": 13,
+        "day": 1
+      },
+      "absoluteDay": 738218
+    },
+    {
+      "gregorian": {
+        "year": 2022,
+        "month": 4,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5782,
+        "month": 13,
+        "day": 29
+      },
+      "absoluteDay": 738246
+    },
+    {
+      "gregorian": {
+        "year": 2023,
+        "month": 9,
+        "day": 16
+      },
+      "hebrew": {
+        "year": 5784,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 738779
+    },
+    {
+      "gregorian": {
+        "year": 2024,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5784,
+        "month": 10,
+        "day": 20
+      },
+      "absoluteDay": 738886
+    },
+    {
+      "gregorian": {
+        "year": 2024,
+        "month": 2,
+        "day": 28
+      },
+      "hebrew": {
+        "year": 5784,
+        "month": 12,
+        "day": 19
+      },
+      "absoluteDay": 738944
+    },
+    {
+      "gregorian": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "hebrew": {
+        "year": 5784,
+        "month": 12,
+        "day": 20
+      },
+      "absoluteDay": 738945
+    },
+    {
+      "gregorian": {
+        "year": 2024,
+        "month": 3,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5784,
+        "month": 12,
+        "day": 21
+      },
+      "absoluteDay": 738946
+    },
+    {
+      "gregorian": {
+        "year": 2024,
+        "month": 3,
+        "day": 10
+      },
+      "hebrew": {
+        "year": 5784,
+        "month": 12,
+        "day": 30
+      },
+      "absoluteDay": 738955
+    },
+    {
+      "gregorian": {
+        "year": 2024,
+        "month": 3,
+        "day": 11
+      },
+      "hebrew": {
+        "year": 5784,
+        "month": 13,
+        "day": 1
+      },
+      "absoluteDay": 738956
+    },
+    {
+      "gregorian": {
+        "year": 2024,
+        "month": 9,
+        "day": 30
+      },
+      "hebrew": {
+        "year": 5784,
+        "month": 6,
+        "day": 27
+      },
+      "absoluteDay": 739159
+    },
+    {
+      "gregorian": {
+        "year": 2024,
+        "month": 10,
+        "day": 2
+      },
+      "hebrew": {
+        "year": 5784,
+        "month": 6,
+        "day": 29
+      },
+      "absoluteDay": 739161
+    },
+    {
+      "gregorian": {
+        "year": 2024,
+        "month": 10,
+        "day": 3
+      },
+      "hebrew": {
+        "year": 5785,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 739162
+    },
+    {
+      "gregorian": {
+        "year": 2025,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5785,
+        "month": 10,
+        "day": 1
+      },
+      "absoluteDay": 739252
+    },
+    {
+      "gregorian": {
+        "year": 2025,
+        "month": 3,
+        "day": 29
+      },
+      "hebrew": {
+        "year": 5785,
+        "month": 12,
+        "day": 29
+      },
+      "absoluteDay": 739339
+    },
+    {
+      "gregorian": {
+        "year": 2025,
+        "month": 7,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5785,
+        "month": 4,
+        "day": 5
+      },
+      "absoluteDay": 739433
+    },
+    {
+      "gregorian": {
+        "year": 2025,
+        "month": 9,
+        "day": 22
+      },
+      "hebrew": {
+        "year": 5785,
+        "month": 6,
+        "day": 29
+      },
+      "absoluteDay": 739516
+    },
+    {
+      "gregorian": {
+        "year": 2025,
+        "month": 9,
+        "day": 23
+      },
+      "hebrew": {
+        "year": 5786,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 739517
+    },
+    {
+      "gregorian": {
+        "year": 2025,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 5786,
+        "month": 10,
+        "day": 11
+      },
+      "absoluteDay": 739616
+    },
+    {
+      "gregorian": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5786,
+        "month": 10,
+        "day": 12
+      },
+      "absoluteDay": 739617
+    },
+    {
+      "gregorian": {
+        "year": 2026,
+        "month": 9,
+        "day": 11
+      },
+      "hebrew": {
+        "year": 5786,
+        "month": 6,
+        "day": 29
+      },
+      "absoluteDay": 739870
+    },
+    {
+      "gregorian": {
+        "year": 2026,
+        "month": 9,
+        "day": 12
+      },
+      "hebrew": {
+        "year": 5787,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 739871
+    },
+    {
+      "gregorian": {
+        "year": 2026,
+        "month": 9,
+        "day": 13
+      },
+      "hebrew": {
+        "year": 5787,
+        "month": 7,
+        "day": 2
+      },
+      "absoluteDay": 739872
+    },
+    {
+      "gregorian": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5787,
+        "month": 10,
+        "day": 22
+      },
+      "absoluteDay": 739982
+    },
+    {
+      "gregorian": {
+        "year": 2027,
+        "month": 3,
+        "day": 9
+      },
+      "hebrew": {
+        "year": 5787,
+        "month": 12,
+        "day": 30
+      },
+      "absoluteDay": 740049
+    },
+    {
+      "gregorian": {
+        "year": 2027,
+        "month": 3,
+        "day": 10
+      },
+      "hebrew": {
+        "year": 5787,
+        "month": 13,
+        "day": 1
+      },
+      "absoluteDay": 740050
+    },
+    {
+      "gregorian": {
+        "year": 2027,
+        "month": 4,
+        "day": 8
+      },
+      "hebrew": {
+        "year": 5787,
+        "month": 1,
+        "day": 1
+      },
+      "absoluteDay": 740079
+    },
+    {
+      "gregorian": {
+        "year": 2027,
+        "month": 5,
+        "day": 7
+      },
+      "hebrew": {
+        "year": 5787,
+        "month": 1,
+        "day": 30
+      },
+      "absoluteDay": 740108
+    },
+    {
+      "gregorian": {
+        "year": 2027,
+        "month": 10,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5787,
+        "month": 6,
+        "day": 29
+      },
+      "absoluteDay": 740255
+    },
+    {
+      "gregorian": {
+        "year": 2027,
+        "month": 10,
+        "day": 2
+      },
+      "hebrew": {
+        "year": 5788,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 740256
+    },
+    {
+      "gregorian": {
+        "year": 2028,
+        "month": 2,
+        "day": 29
+      },
+      "hebrew": {
+        "year": 5788,
+        "month": 12,
+        "day": 2
+      },
+      "absoluteDay": 740406
+    },
+    {
+      "gregorian": {
+        "year": 2028,
+        "month": 9,
+        "day": 20
+      },
+      "hebrew": {
+        "year": 5788,
+        "month": 6,
+        "day": 29
+      },
+      "absoluteDay": 740610
+    },
+    {
+      "gregorian": {
+        "year": 2028,
+        "month": 9,
+        "day": 21
+      },
+      "hebrew": {
+        "year": 5789,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 740611
+    },
+    {
+      "gregorian": {
+        "year": 2029,
+        "month": 9,
+        "day": 10
+      },
+      "hebrew": {
+        "year": 5790,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 740965
+    },
+    {
+      "gregorian": {
+        "year": 2030,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5790,
+        "month": 10,
+        "day": 26
+      },
+      "absoluteDay": 741078
+    },
+    {
+      "gregorian": {
+        "year": 2030,
+        "month": 7,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5790,
+        "month": 3,
+        "day": 30
+      },
+      "absoluteDay": 741259
+    },
+    {
+      "gregorian": {
+        "year": 2030,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 5791,
+        "month": 10,
+        "day": 5
+      },
+      "absoluteDay": 741442
+    },
+    {
+      "gregorian": {
+        "year": 2035,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5795,
+        "month": 10,
+        "day": 20
+      },
+      "absoluteDay": 742904
+    },
+    {
+      "gregorian": {
+        "year": 2035,
+        "month": 7,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5795,
+        "month": 3,
+        "day": 24
+      },
+      "absoluteDay": 743085
+    },
+    {
+      "gregorian": {
+        "year": 2035,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 5796,
+        "month": 9,
+        "day": 30
+      },
+      "absoluteDay": 743268
+    },
+    {
+      "gregorian": {
+        "year": 2040,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5800,
+        "month": 10,
+        "day": 15
+      },
+      "absoluteDay": 744730
+    },
+    {
+      "gregorian": {
+        "year": 2040,
+        "month": 2,
+        "day": 29
+      },
+      "hebrew": {
+        "year": 5800,
+        "month": 12,
+        "day": 15
+      },
+      "absoluteDay": 744789
+    },
+    {
+      "gregorian": {
+        "year": 2040,
+        "month": 7,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5800,
+        "month": 4,
+        "day": 20
+      },
+      "absoluteDay": 744912
+    },
+    {
+      "gregorian": {
+        "year": 2040,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 5801,
+        "month": 10,
+        "day": 27
+      },
+      "absoluteDay": 745095
+    },
+    {
+      "gregorian": {
+        "year": 2050,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5810,
+        "month": 10,
+        "day": 7
+      },
+      "absoluteDay": 748383
+    },
+    {
+      "gregorian": {
+        "year": 2100,
+        "month": 3,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5860,
+        "month": 12,
+        "day": 20
+      },
+      "absoluteDay": 766704
+    },
+    {
+      "gregorian": {
+        "year": 2200,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 5960,
+        "month": 10,
+        "day": 13
+      },
+      "absoluteDay": 803169
+    },
+    {
+      "gregorian": {
+        "year": 2200,
+        "month": 6,
+        "day": 15
+      },
+      "hebrew": {
+        "year": 5960,
+        "month": 4,
+        "day": 1
+      },
+      "absoluteDay": 803334
+    },
+    {
+      "gregorian": {
+        "year": 2200,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 5961,
+        "month": 10,
+        "day": 24
+      },
+      "absoluteDay": 803533
+    },
+    {
+      "gregorian": {
+        "year": 2239,
+        "month": 9,
+        "day": 30
+      },
+      "hebrew": {
+        "year": 6000,
+        "month": 7,
+        "day": 1
+      },
+      "absoluteDay": 817685
+    },
+    {
+      "gregorian": {
+        "year": 2400,
+        "month": 2,
+        "day": 29
+      },
+      "hebrew": {
+        "year": 6160,
+        "month": 12,
+        "day": 2
+      },
+      "absoluteDay": 876276
+    },
+    {
+      "gregorian": {
+        "year": 2500,
+        "month": 2,
+        "day": 28
+      },
+      "hebrew": {
+        "year": 6260,
+        "month": 11,
+        "day": 28
+      },
+      "absoluteDay": 912800
+    },
+    {
+      "gregorian": {
+        "year": 2933,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 6693,
+        "month": 10,
+        "day": 12
+      },
+      "absoluteDay": 1070892
+    },
+    {
+      "gregorian": {
+        "year": 2933,
+        "month": 6,
+        "day": 15
+      },
+      "hebrew": {
+        "year": 6693,
+        "month": 3,
+        "day": 30
+      },
+      "absoluteDay": 1071057
+    },
+    {
+      "gregorian": {
+        "year": 2933,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 6694,
+        "month": 10,
+        "day": 23
+      },
+      "absoluteDay": 1071256
+    },
+    {
+      "gregorian": {
+        "year": 3000,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 6760,
+        "month": 10,
+        "day": 2
+      },
+      "absoluteDay": 1095363
+    },
+    {
+      "gregorian": {
+        "year": 3666,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 7426,
+        "month": 10,
+        "day": 11
+      },
+      "absoluteDay": 1338615
+    },
+    {
+      "gregorian": {
+        "year": 3666,
+        "month": 6,
+        "day": 15
+      },
+      "hebrew": {
+        "year": 7426,
+        "month": 3,
+        "day": 29
+      },
+      "absoluteDay": 1338780
+    },
+    {
+      "gregorian": {
+        "year": 3666,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 7427,
+        "month": 10,
+        "day": 22
+      },
+      "absoluteDay": 1338979
+    },
+    {
+      "gregorian": {
+        "year": 4399,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 8159,
+        "month": 10,
+        "day": 10
+      },
+      "absoluteDay": 1606337
+    },
+    {
+      "gregorian": {
+        "year": 4399,
+        "month": 6,
+        "day": 15
+      },
+      "hebrew": {
+        "year": 8159,
+        "month": 2,
+        "day": 27
+      },
+      "absoluteDay": 1606502
+    },
+    {
+      "gregorian": {
+        "year": 4399,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 8160,
+        "month": 9,
+        "day": 19
+      },
+      "absoluteDay": 1606701
+    },
+    {
+      "gregorian": {
+        "year": 5132,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 8892,
+        "month": 10,
+        "day": 6
+      },
+      "absoluteDay": 1874059
+    },
+    {
+      "gregorian": {
+        "year": 5132,
+        "month": 6,
+        "day": 15
+      },
+      "hebrew": {
+        "year": 8892,
+        "month": 2,
+        "day": 24
+      },
+      "absoluteDay": 1874225
+    },
+    {
+      "gregorian": {
+        "year": 5132,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 8893,
+        "month": 9,
+        "day": 17
+      },
+      "absoluteDay": 1874424
+    },
+    {
+      "gregorian": {
+        "year": 5865,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 9625,
+        "month": 10,
+        "day": 7
+      },
+      "absoluteDay": 2141783
+    },
+    {
+      "gregorian": {
+        "year": 5865,
+        "month": 6,
+        "day": 15
+      },
+      "hebrew": {
+        "year": 9625,
+        "month": 2,
+        "day": 24
+      },
+      "absoluteDay": 2141948
+    },
+    {
+      "gregorian": {
+        "year": 5865,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 9626,
+        "month": 9,
+        "day": 17
+      },
+      "absoluteDay": 2142147
+    },
+    {
+      "gregorian": {
+        "year": 6598,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 10358,
+        "month": 10,
+        "day": 6
+      },
+      "absoluteDay": 2409506
+    },
+    {
+      "gregorian": {
+        "year": 6598,
+        "month": 6,
+        "day": 15
+      },
+      "hebrew": {
+        "year": 10358,
+        "month": 2,
+        "day": 23
+      },
+      "absoluteDay": 2409671
+    },
+    {
+      "gregorian": {
+        "year": 6598,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 10359,
+        "month": 9,
+        "day": 15
+      },
+      "absoluteDay": 2409870
+    },
+    {
+      "gregorian": {
+        "year": 7331,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 11091,
+        "month": 10,
+        "day": 2
+      },
+      "absoluteDay": 2677228
+    },
+    {
+      "gregorian": {
+        "year": 7331,
+        "month": 6,
+        "day": 15
+      },
+      "hebrew": {
+        "year": 11091,
+        "month": 2,
+        "day": 19
+      },
+      "absoluteDay": 2677393
+    },
+    {
+      "gregorian": {
+        "year": 7331,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 11092,
+        "month": 9,
+        "day": 12
+      },
+      "absoluteDay": 2677592
+    },
+    {
+      "gregorian": {
+        "year": 8064,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 11824,
+        "month": 9,
+        "day": 30
+      },
+      "absoluteDay": 2944951
+    },
+    {
+      "gregorian": {
+        "year": 8064,
+        "month": 6,
+        "day": 15
+      },
+      "hebrew": {
+        "year": 11824,
+        "month": 2,
+        "day": 18
+      },
+      "absoluteDay": 2945117
+    },
+    {
+      "gregorian": {
+        "year": 8064,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 11825,
+        "month": 9,
+        "day": 11
+      },
+      "absoluteDay": 2945316
+    },
+    {
+      "gregorian": {
+        "year": 8797,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 12557,
+        "month": 9,
+        "day": 29
+      },
+      "absoluteDay": 3212674
+    },
+    {
+      "gregorian": {
+        "year": 8797,
+        "month": 6,
+        "day": 15
+      },
+      "hebrew": {
+        "year": 12557,
+        "month": 2,
+        "day": 16
+      },
+      "absoluteDay": 3212839
+    },
+    {
+      "gregorian": {
+        "year": 8797,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 12558,
+        "month": 9,
+        "day": 9
+      },
+      "absoluteDay": 3213038
+    },
+    {
+      "gregorian": {
+        "year": 9530,
+        "month": 1,
+        "day": 1
+      },
+      "hebrew": {
+        "year": 13290,
+        "month": 8,
+        "day": 26
+      },
+      "absoluteDay": 3480396
+    },
+    {
+      "gregorian": {
+        "year": 9530,
+        "month": 6,
+        "day": 15
+      },
+      "hebrew": {
+        "year": 13290,
+        "month": 2,
+        "day": 14
+      },
+      "absoluteDay": 3480561
+    },
+    {
+      "gregorian": {
+        "year": 9530,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 13291,
+        "month": 9,
+        "day": 7
+      },
+      "absoluteDay": 3480760
+    },
+    {
+      "gregorian": {
+        "year": 9999,
+        "month": 12,
+        "day": 31
+      },
+      "hebrew": {
+        "year": 13760,
+        "month": 8,
+        "day": 28
+      },
+      "absoluteDay": 3652059
+    }
+  ]
+}
