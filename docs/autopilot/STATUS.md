@@ -59,10 +59,10 @@
 - מיזוג: main ו-autopilot אומתו באותו commit f120f3998f19c215d14bc74ef20a4acdc6ad2d8f. npm publish לא בוצע.
 
 ## v1.2.0 — שמות חודשים ועיצוב תאריך עברי
-- מצב: מימוש ובדיקות GitHub Actions עברו; מוכן למיזוג ל-main.
+- מצב: הושלם, נבדק ומוזג ל-main ב-fast-forward; גרסת חבילה 1.2.0.
 - נעשה: src/format.js עם getHebrewMonthName ו-formatHebrewDate. ממשק תצוגה דטרמיניסטי בעברית ובאנגלית, תמיכה באדר א׳/ב׳, סימני גרש/גרשיים ותחילית ב׳ לחודש.
 - אימות: test/date-formatting.test.js מכיל 7 בדיקות חדשות; test/public-api.test.js עודכן לממשק בן שבע פונקציות. ערכי קצה נדחים באמצעות ליבת הלוח.
 - תיעוד: README ודוגמת date-conversion עודכנו; גרסת package.json היא 1.2.0; ללא תלויות.
 - CI מאומת: run 43458227200 עבר בכל 4 אזורי הזמן, עם 54/54 בדיקות בכל סביבת CI; שלוש דוגמאות עברו.
-- נשאר: מיזוג ל-main אחרי אימות CI על commit התיעוד.
+- מיזוג: commit ea7e6705979d4e2c20f4722b0fdbf914c3ea94c1 אומת ב-main וב-autopilot לאחר CI ירוק; npm publish לא בוצע.
 
