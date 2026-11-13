@@ -16,6 +16,7 @@ Date conversion and holiday rules often get mixed with timezone-sensitive `Date`
 - Format positive integers and Hebrew years with geresh/gershayim and the special forms for 15 and 16 (`formatHebrewNumber`, `formatHebrewYear`).
 - Get Hebrew month names in English or Hebrew and format complete Hebrew civil dates, including Adar I/II (`getHebrewMonthName`, `formatHebrewDate`).
 - Add or subtract days, calculate signed day differences, and find Hebrew weekdays without timezones (`addHebrewDays`, `daysBetweenHebrewDates`, `getHebrewWeekday`).
+- Create structured seven-column Hebrew month grids with civil Gregorian dates, holiday overlays, and localized names (`getHebrewMonthCalendar`).
 - Run offline, with no runtime or development npm dependencies.
 
 ## Quick start
@@ -28,6 +29,7 @@ cd hebrew-date-kit
 node examples/date-conversion.mjs
 node examples/holidays.mjs
 node examples/numerals.mjs
+node examples/month-calendar.mjs
 ```
 
 The package provides a root ES module export (`hebrew-date-kit`), so the examples can import the package from within the checked-out repository without running `npm install`. The repository is public; no claim of an npm registry release is made here.
@@ -46,6 +48,7 @@ import {
   addHebrewDays,
   daysBetweenHebrewDates,
   getHebrewWeekday,
+  getHebrewMonthCalendar,
 } from 'hebrew-date-kit';
 
 // January=1 for Gregorian months; Nisan=1, Tishrei=7 for Hebrew months.
@@ -79,6 +82,14 @@ addHebrewDays({ year: 5784, month: 12, day: 30 }, 1);
 // { year: 5784, month: 13, day: 1 } (Adar I → Adar II)
 daysBetweenHebrewDates({ year: 5786, month: 6, day: 29 }, roshHashanah); // 1
 getHebrewWeekday(roshHashanah); // 6 (Shabbat)
+
+// Calendar grid: full weeks, null outside-month cells, holiday overlays.
+const monthGrid = getHebrewMonthCalendar(5787, 7, {
+  region: 'israel', locale: 'he', weekStartsOn: 0,
+});
+monthGrid.monthName; // 'תשרי'
+monthGrid.weeks[0][6].hebrewDate; // { year: 5787, month: 7, day: 1 }
+monthGrid.weeks[0][6].holidays[0].name; // 'ראש השנה'
 ```
 
 ### Calendar conventions and limits
@@ -91,6 +102,7 @@ getHebrewWeekday(roshHashanah); // 6 (Shabbat)
 - Hebrew numerals use traditional punctuation. `formatHebrewNumber(5787)` preserves the thousands prefix, whereas `formatHebrewYear(5787)` omits it. The supported input range for these functions is 1–999999.
 - `getHebrewMonthName(year, month, {locale})` uses English by default; `formatHebrewDate({year,month,day}, {locale})` uses Hebrew by default. Both accept `locale: 'en' | 'he'`. Date formatting validates the complete date, including variable Hebrew month lengths. These are display functions only; they do not parse text or calculate sunset.
 - `addHebrewDays(date, days)` accepts signed safe integers, including zero; the result must remain within Hebrew calendar years 1–20000 (the full Hebrew date-arithmetic range, not limited to Gregorian years 1–9999). `daysBetweenHebrewDates(start, end)` returns *end minus start*. `getHebrewWeekday(date)` returns Sunday=0, Monday=1, ..., Saturday/Shabbat=6. Arithmetic uses only integer absolute days and does not mutate input records.
+- `getHebrewMonthCalendar(year, month, {region, locale='en', weekStartsOn=0})` builds complete seven-cell weeks (`weeks`) for a month, with `null` cells before/after the month. Each populated cell has `hebrewDate`, `gregorianDate`, `weekday`, and `holidays` (an array of `{id,name,type,dayOfFestival?}`). The result also contains `monthName` and `daysInMonth`. `weekStartsOn` accepts weekdays 0–6 (Sunday=0), `region` is required (`israel` or `diaspora`), and `locale` is `en` or `he`. As with the holidays API, the *entire Hebrew year* must be within proleptic Gregorian years 1–9999. Out-of-month cells are deliberately left empty instead of returning adjacent-year dates.
 
 ## Run tests
 
@@ -111,12 +123,14 @@ src/
   dates.js            # Date conversion functions
   format.js           # Month names and formatted Hebrew dates
   holidays.js         # Regional holiday and fast-day rules
+  month-calendar.js   # Month grids with holiday overlays
   numerals.mjs        # Hebrew numerals and year formatting
   index.js            # Public ES module entry point
 examples/
   date-conversion.mjs
   holidays.mjs
   numerals.mjs
+  month-calendar.mjs
 test/                  # Node.js built-in test runner + fixtures
 package.json          # Node >=22, ES modules and package exports
 LICENSE               # MIT

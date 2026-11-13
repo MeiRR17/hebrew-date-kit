@@ -68,3 +68,10 @@ export { daysBetweenHebrewDates } from './arithmetic.js';
  * @see {@link ./arithmetic.js}
  */
 export { getHebrewWeekday } from './arithmetic.js';
+
+/**
+ * Build a Hebrew calendar month grid of seven-day weeks, Gregorian dates,
+ * and region/locale-aware holiday overlays.
+ * @see {@link ./month-calendar.js}
+ */
+export { getHebrewMonthCalendar } from './month-calendar.js';

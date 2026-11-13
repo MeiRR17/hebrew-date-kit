@@ -9,6 +9,7 @@ const exportsExpected = [
   'formatHebrewDate',
   'formatHebrewNumber',
   'formatHebrewYear',
+  'getHebrewMonthCalendar',
   'getHebrewMonthName',
   'getHebrewWeekday',
   'getJewishHolidays',
@@ -53,4 +54,7 @@ test('public numeral API preserves special spelling and abbreviated years', () =
   assert.deepEqual(api.addHebrewDays(rh,-1),{year:5786,month:6,day:29});
   assert.equal(api.daysBetweenHebrewDates(api.addHebrewDays(rh,-1),rh),1);
   assert.equal(api.getHebrewWeekday(rh),6);
+  const calendar=api.getHebrewMonthCalendar(5787,7,{region:'israel',locale:'he'});
+  assert.equal(calendar.monthName,'תשרי');
+  assert.deepEqual(calendar.weeks[0][6].hebrewDate,{year:5787,month:7,day:1});
 });
