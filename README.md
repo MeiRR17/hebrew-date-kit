@@ -14,6 +14,7 @@ Date conversion and holiday rules often get mixed with timezone-sensitive `Date`
 - Handle Hebrew leap years, Adar I/II, Gregorian leap days, and Hebrew year boundaries.
 - List traditional holidays and observances for a Hebrew year (`getJewishHolidays`), including regional differences for Pesach, Shavuot, and Simchat Torah, postponements of traditional fasts, and optional Hebrew event names (`locale: 'he'`).
 - Format positive integers and Hebrew years with geresh/gershayim and the special forms for 15 and 16 (`formatHebrewNumber`, `formatHebrewYear`).
+- Get Hebrew month names in English or Hebrew and format complete Hebrew civil dates, including Adar I/II (`getHebrewMonthName`, `formatHebrewDate`).
 - Run offline, with no runtime or development npm dependencies.
 
 ## Quick start
@@ -39,6 +40,8 @@ import {
   getJewishHolidays,
   formatHebrewNumber,
   formatHebrewYear,
+  getHebrewMonthName,
+  formatHebrewDate,
 } from 'hebrew-date-kit';
 
 // January=1 for Gregorian months; Nisan=1, Tishrei=7 for Hebrew months.
@@ -58,6 +61,12 @@ const simchatTorahInIsrael = israel.find(event => event.id === 'simchat_torah');
 formatHebrewNumber(15); // 'ט״ו'
 formatHebrewNumber(5787); // 'ה׳תשפ״ז'
 formatHebrewYear(5787); // 'תשפ״ז'
+getHebrewMonthName(5784, 13, { locale: 'he' }); // 'אדר ב׳'
+getHebrewMonthName(5785, 12); // 'Adar'
+formatHebrewDate({ year: 5784, month: 13, day: 14 });
+// 'י״ד באדר ב׳ תשפ״ד'
+formatHebrewDate({ year: 5784, month: 13, day: 14 }, { locale: 'en' });
+// '14 Adar II 5784'
 ```
 
 ### Calendar conventions and limits
@@ -68,6 +77,7 @@ formatHebrewYear(5787); // 'תשפ״ז'
 - `getJewishHolidays(year, { region, locale })` requires `region` to be exactly `'israel'` or `'diaspora'`; optional `locale` is `'en'` (default) or `'he'` for Hebrew display names. Only `name` is localized; identifiers, date fields, event types, and sorting are identical. It returns chronologically sorted events with `id`, `name`, `type`, `hebrewDate`, `gregorianDate`, and `absoluteDay`; multi-day festivals also have `dayOfFestival`. The entire requested Hebrew year must be within the supported Gregorian range.
 - This list represents selected traditional observances, **not** a comprehensive halachic calendar or a source of religious rulings. Modern state holidays and location-based times are not included.
 - Hebrew numerals use traditional punctuation. `formatHebrewNumber(5787)` preserves the thousands prefix, whereas `formatHebrewYear(5787)` omits it. The supported input range for these functions is 1–999999.
+- `getHebrewMonthName(year, month, {locale})` uses English by default; `formatHebrewDate({year,month,day}, {locale})` uses Hebrew by default. Both accept `locale: 'en' | 'he'`. Date formatting validates the complete date, including variable Hebrew month lengths. These are display functions only; they do not parse text or calculate sunset.
 
 ## Run tests
 
@@ -85,6 +95,7 @@ Fixtures under `test/fixtures/` contain independent calendar anchors, date pairs
 src/
   calendar-core.js    # Fixed Hebrew/Gregorian calendar arithmetic
   dates.js            # Date conversion functions
+  format.js           # Month names and formatted Hebrew dates
   holidays.js         # Regional holiday and fast-day rules
   numerals.mjs        # Hebrew numerals and year formatting
   index.js            # Public ES module entry point

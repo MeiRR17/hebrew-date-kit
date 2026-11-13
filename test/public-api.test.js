@@ -4,8 +4,10 @@ import * as api from 'hebrew-date-kit';
 import * as entry from '../src/index.js';
 
 const exportsExpected = [
+  'formatHebrewDate',
   'formatHebrewNumber',
   'formatHebrewYear',
+  'getHebrewMonthName',
   'getJewishHolidays',
   'toGregorian',
   'toHebrew',
@@ -42,4 +44,6 @@ test('public numeral API preserves special spelling and abbreviated years', () =
   assert.equal(api.formatHebrewNumber(15), 'ט״ו');
   assert.equal(api.formatHebrewNumber(16), 'ט״ז');
   assert.equal(api.formatHebrewYear(5787), 'תשפ״ז');
+  assert.equal(api.getHebrewMonthName(5784, 13, {locale:'he'}), 'אדר ב׳');
+  assert.equal(api.formatHebrewDate({year:5787,month:7,day:1}), 'א׳ בתשרי תשפ״ז');
 });

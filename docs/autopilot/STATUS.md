@@ -58,3 +58,10 @@
 - CI: GitHub Actions run 43451656674 עבר 4/4 עבודות, 47/47 בדיקות בכל סביבת TZ ו-0 כישלונות; שלוש דוגמאות שימוש רצו בהצלחה.
 - מיזוג: main ו-autopilot אומתו באותו commit f120f3998f19c215d14bc74ef20a4acdc6ad2d8f. npm publish לא בוצע.
 
+## v1.2.0 — שמות חודשים ועיצוב תאריך עברי
+- מצב: מימוש חדש בענף autopilot; נדרש אימות GitHub Actions לפני מיזוג.
+- נעשה: src/format.js עם getHebrewMonthName ו-formatHebrewDate. ממשק תצוגה דטרמיניסטי בעברית ובאנגלית, תמיכה באדר א׳/ב׳, סימני גרש/גרשיים ותחילית ב׳ לחודש.
+- אימות: test/date-formatting.test.js מכיל 7 בדיקות חדשות; test/public-api.test.js עודכן לממשק בן שבע פונקציות. ערכי קצה נדחים באמצעות ליבת הלוח.
+- תיעוד: README ודוגמת date-conversion עודכנו; גרסת package.json היא 1.2.0; ללא תלויות.
+- נשאר: אימות CI על ה-commit, ואז מיזוג ל-main.
+

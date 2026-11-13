@@ -68,3 +68,11 @@ after: v6
 - [x] עדכן דוגמה, README וגרסת package.json ל-1.1.0 ללא תלויות נוספות.
 Done when: GitHub Actions עובר ב-autopilot בכל ארבעת אזורי הזמן, והקוד מוזג ל-main בבטחה.
 
+## v1.2.0 — שמות חודשים ועיצוב תאריך עברי
+repo: MeiRR17/hebrew-date-kit
+after: v1.1.0
+- [x] הוסף getHebrewMonthName(year, month, {locale}) עם שמות חודש בעברית ובאנגלית וזיהוי אדר א׳/ב׳ בשנה מעוברת.
+- [x] הוסף formatHebrewDate({year,month,day}, {locale}) עם עיצוב עברי מלא, עיצוב אנגלי חלופי ואימות תאריך דרך ליבת הלוח.
+- [x] שמור על חישוב נטול timezone ועל הממשקים הקיימים, הוסף בדיקות קלט שגוי, שנות עיבור, כל שמות החודשים ושמירת ה-API.
+- [x] עדכן README, דוגמה, ממשק ציבורי וגרסת חבילה ל-1.2.0 ללא תלויות.
+Done when: GitHub Actions עובר בכל ארבעת אזורי הזמן, ומיזוג ל-main מתבצע רק לאחר CI ירוק.

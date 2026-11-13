@@ -38,3 +38,15 @@ export { formatHebrewNumber } from './numerals.mjs';
  * @see {@link ./numerals.mjs}
  */
 export { formatHebrewYear } from './numerals.mjs';
+
+/**
+ * Get the month name of a Hebrew year; Adar I and Adar II are distinguished.
+ * @see {@link ./format.js}
+ */
+export { getHebrewMonthName } from './format.js';
+
+/**
+ * Format a validated Hebrew date as Hebrew or English display text.
+ * @see {@link ./format.js}
+ */
+export { formatHebrewDate } from './format.js';
