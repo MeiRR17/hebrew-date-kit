@@ -43,7 +43,7 @@ test('date differences use end minus start and obey antisymmetry', () => {
   for (const a of dates) {
     assert.equal(daysBetweenHebrewDates(a, a), 0);
     for (const b of dates) {
-      assert.equal(daysBetweenHebrewDates(a,b), -daysBetweenHebrewDates(b,a));
+      assert.equal(daysBetweenHebrewDates(a,b) + daysBetweenHebrewDates(b,a), 0);
     }
   }
 });
