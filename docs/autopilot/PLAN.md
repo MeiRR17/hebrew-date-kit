@@ -43,11 +43,11 @@ Done when: node --test test/holidays.test.js עובר, ולפחות פסח, שב
 ## v5 — ממשק ציבורי ופרסום
 repo: MeiRR17/hebrew-date-kit
 after: v2, v3, v4
-- [ ] צור src/index.js עם ייצוא API ציבורי מצומצם ו-JSDoc לכל export (לרבות src/numerals.mjs), וחבר את package.json לשימוש ב-import כ-ES module ללא CLI.
-- [ ] כתוב README.md מלא באנגלית: שם, משפט תיאור, מוטיבציה, תכונות, quick start, שימוש, הרצת בדיקות, מבנה הפרויקט, וסעיף Author אחרון בנוסח המדויק שב-BRIEF.
-- [ ] צור LICENSE בתנאי MIT עם copyright 2026 Meir Dvir.
-- [ ] צור examples/date-conversion.mjs, examples/holidays.mjs ו-examples/numerals.mjs, שכל אחד רץ עם node בלבד ומדגים את ממשק הספרייה.
-- [ ] ודא ש-package.json אינו כולל bin, npm dependencies או devDependencies ושהתיעוד מתאר רק יכולות ממומשות.
+- [x] צור src/index.js עם ייצוא API ציבורי מצומצם ו-JSDoc לכל export (לרבות src/numerals.mjs), וחבר את package.json לשימוש ב-import כ-ES module ללא CLI.
+- [x] כתוב README.md מלא באנגלית: שם, משפט תיאור, מוטיבציה, תכונות, quick start, שימוש, הרצת בדיקות, מבנה הפרויקט, וסעיף Author אחרון בנוסח המדויק שב-BRIEF.
+- [x] צור LICENSE בתנאי MIT עם copyright 2026 Meir Dvir.
+- [x] צור examples/date-conversion.mjs, examples/holidays.mjs ו-examples/numerals.mjs, שכל אחד רץ עם node בלבד ומדגים את ממשק הספרייה.
+- [x] ודא ש-package.json אינו כולל bin, npm dependencies או devDependencies ושהתיעוד מתאר רק יכולות ממומשות.
 Done when: כל שלוש הדוגמאות רצות ב-node 22+, import של src/index.js מצליח, README מכיל את הסעיפים שנדרשו ו-LICENSE הוא MIT עם ייחוס 2026.
 
 ## v6 — אימות אינטגרציה וסגירת מוצר
