@@ -4,11 +4,11 @@
 ## v1 — תשתית וחישובי לוח
 repo: MeiRR17/hebrew-date-kit
 after: none
-- [ ] צור package.json במצב ES modules עם engines של Node.js 22 ומעלה, פקודת test שמריצה node --test וללא dependencies או devDependencies.
-- [ ] ממש ב-src/calendar-core.js חישובי ימים אבסולוטיים, שנה עברית מעוברת, דחיות ראש השנה, אורכי חשוון/כסלו ואורכי חודשים; הימנע מתלות באזור זמן.
-- [ ] הוסף test/calendar-core.test.js ו-test/fixtures/calendar-anchors.json עם מקרי קצה ידועים: ראש השנה, שנים פשוטות ומעוברות ושנות לוח משתנות.
-- [ ] הוסף בדיקת קלט למספרי שנים/חודשים/ימים לא תקינים ותיעוד JSDoc לכל export מהמודול.
-- [ ] קבע וחשוף בחישובי הליבה מניין ימים אבסולוטי אחיד (יום 1 = 1 בינואר שנת 1 בלוח הגרגוריאני הפרולפטי), עם ימים שלמים בלבד וגבולות שנה מפורשים; בדוק מקרי סף של דחיות ראש השנה וחשוון/כסלו.
+- [x] צור package.json במצב ES modules עם engines של Node.js 22 ומעלה, פקודת test שמריצה node --test וללא dependencies או devDependencies.
+- [x] ממש ב-src/calendar-core.js חישובי ימים אבסולוטיים, שנה עברית מעוברת, דחיות ראש השנה, אורכי חשוון/כסלו ואורכי חודשים; הימנע מתלות באזור זמן.
+- [x] הוסף test/calendar-core.test.js ו-test/fixtures/calendar-anchors.json עם מקרי קצה ידועים: ראש השנה, שנים פשוטות ומעוברות ושנות לוח משתנות.
+- [x] הוסף בדיקת קלט למספרי שנים/חודשים/ימים לא תקינים ותיעוד JSDoc לכל export מהמודול.
+- [x] קבע וחשוף בחישובי הליבה מניין ימים אבסולוטי אחיד (יום 1 = 1 בינואר שנת 1 בלוח הגרגוריאני הפרולפטי), עם ימים שלמים בלבד וגבולות שנה מפורשים; בדוק מקרי סף של דחיות ראש השנה וחשוון/כסלו.
 Done when: קיימים package.json, src/calendar-core.js, test/calendar-core.test.js ו-fixture; הפקודה node --test test/calendar-core.test.js עוברת ללא npm install או תלות חיצונית.
 
 ## v2 — המרת תאריכים דו-כיוונית
