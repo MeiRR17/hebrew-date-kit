@@ -75,3 +75,10 @@ export { getHebrewWeekday } from './arithmetic.js';
  * @see {@link ./month-calendar.js}
  */
 export { getHebrewMonthCalendar } from './month-calendar.js';
+
+/**
+ * Export traditional Jewish holidays as an RFC 5545 all-day iCalendar (.ics)
+ * file with Israel/diaspora options, localization and UTC metadata.
+ * @see {@link ./icalendar.js}
+ */
+export { exportJewishHolidaysIcs } from './icalendar.js';

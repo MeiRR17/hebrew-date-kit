@@ -37,3 +37,5 @@ jobs:
           node examples/date-conversion.mjs
           node examples/holidays.mjs
           node examples/numerals.mjs
+          node examples/month-calendar.mjs
+          node examples/export-ics.mjs > /dev/null

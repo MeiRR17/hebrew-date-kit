@@ -95,3 +95,12 @@ after: v1.3.0
 - [x] הוסף דוגמת CLI, בדיקות API, תיעוד וגרסת 1.4.0 בלי תלות חיצונית.
 Done when: CI של GitHub Actions עובר בארבעה אזורי זמן, ומיזוג ל-main מתבצע רק לאחר בדיקות ירוקות.
 
+## v1.5.0 — ייצוא חגים ל-iCalendar (.ics)
+repo: MeiRR17/hebrew-date-kit
+after: v1.4.0
+- [x] הוסף exportJewishHolidaysIcs(year, {region,locale,dtstamp}) עם VEVENT לכל מופע חג, כולל UID קבוע ו-DTSTART כערך DATE.
+- [x] תמוך בשמות בעברית ואנגלית, אירועים חופפים והבדלי מועדים בין ישראל לתפוצות; שמור על כללי ציון יום אזרחי ללא חישובי שקיעה.
+- [x] ממש escaping ו-CRLF, קיפול שורות בקוד-פוינט UTF-8 עד 75 אוקטטים, חותמת UTC תקינה ושדה TRANSP:TRANSPARENT.
+- [x] הוסף בדיקות קבלה תקניות, תיעוד, דוגמת .ics, בדיקת CI לדוגמה וגרסה 1.5.0 ללא תלויות.
+Done when: CI של GitHub Actions עובר בכל ארבעת אזורי הזמן, והמימוש מוזג ל-main רק אחרי הצלחה מאומתת.
+

@@ -82,3 +82,11 @@
 - package.json 1.4.0; אין dependencies. GitHub Actions run 43466737501 עבר 4/4 עבודות ב-Node.js 22, עם 73/73 בדיקות בכל אזור זמן; כל דוגמאות השימוש עברו.
 - מיזוג: commit 1204f4ff00f55e3103399ee5b94b7c6c9079d9a7 אומת ב-main וב-autopilot; לא בוצע npm publish.
 
+## v1.5.0 — ייצוא חגים ל-iCalendar (.ics)
+- מצב: מומש לענף autopilot; ממתין לאימות GitHub Actions ולמיזוג.
+- נוסף src/icalendar.js עם exportJewishHolidaysIcs, ייצוא UTF-8 לפי RFC 5545, כולל UID יציב, DTSTART של יום אזרחי, DTSTAMP ואירועי חג חופפים.
+- שמות בעברית/אנגלית, ישראל/תפוצות, קיפול שורות UTF-8 ומניעת הזרקת שדות באמצעות אימות אפשרויות וקידוד TEXT.
+- נוסף test/icalendar.test.js עם 7 בדיקות, examples/export-ics.mjs, README, CI ודוגמת שימוש, API בן 12 פונקציות ו-package.json 1.5.0.
+- מגבלות: קובצי .ics הם לימים אזרחיים שלמים, ללא זמן שקיעה או זמנים הלכתיים. אין npm publish.
+- נותר: CI ירוק בארבעה אזורי זמן ומיזוג בטוח ל-main.
+

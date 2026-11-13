@@ -6,6 +6,7 @@ import * as entry from '../src/index.js';
 const exportsExpected = [
   'addHebrewDays',
   'daysBetweenHebrewDates',
+  'exportJewishHolidaysIcs',
   'formatHebrewDate',
   'formatHebrewNumber',
   'formatHebrewYear',
@@ -57,4 +58,7 @@ test('public numeral API preserves special spelling and abbreviated years', () =
   const calendar=api.getHebrewMonthCalendar(5787,7,{region:'israel',locale:'he'});
   assert.equal(calendar.monthName,'תשרי');
   assert.deepEqual(calendar.weeks[0][6].hebrewDate,{year:5787,month:7,day:1});
+  const ics=api.exportJewishHolidaysIcs(5787,{region:'israel',dtstamp:'20261113T175700Z'});
+  assert.ok(ics.startsWith('BEGIN:VCALENDAR\r\nVERSION:2.0\r\n'));
+  assert.ok(ics.includes('DTSTART;VALUE=DATE:20260912'));
 });
