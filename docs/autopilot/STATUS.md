@@ -67,9 +67,10 @@
 - מיזוג: commit ea7e6705979d4e2c20f4722b0fdbf914c3ea94c1 אומת ב-main וב-autopilot לאחר CI ירוק; npm publish לא בוצע.
 
 ## v1.3.0 — חישובי תאריכים עבריים וימי השבוע
-- מצב: מימוש חדש ב-autopilot; ממתין לאימות GitHub Actions לפני מיזוג.
+- מצב: הושלם ומוזג ל-main ב-fast-forward; גרסת חבילה 1.3.0.
 - נוסף src/arithmetic.js עם addHebrewDays(date, days), daysBetweenHebrewDates(start,end), getHebrewWeekday(date).
 - חשבון ימים אבסולוטיים, ללא timezone; תמיכה בשנים עבריות 1–20000, מעברי שנים וחודשים, החזרת יום שבוע 0=Sunday ועד 6=Shabbat.
 - נוסף test/date-arithmetic.test.js עם 9 בדיקות; API ציבורי בן 10 פונקציות; README ודוגמה עודכנו; package.json 1.3.0.
-- נותר: אימות CI ומיזוג ל-main כאשר יציב. לא בוצע npm publish.
+- CI: run 43460794380 עבר בארבע סביבות Node.js 22, עם 63/63 בדיקות בכל סביבה ואפס כישלונות.
+- מיזוג: commit 5e94d1ed0e1b60726e227448c379f29e20c29d56 נבדק ונמצא ב-main וב-autopilot; npm publish לא בוצע.
 
