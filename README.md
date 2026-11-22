@@ -18,7 +18,7 @@ Date conversion and holiday rules often get mixed with timezone-sensitive `Date`
 - Get Hebrew month names in English or Hebrew and format complete Hebrew civil dates, including Adar I/II (`getHebrewMonthName`, `formatHebrewDate`).
 - Add or subtract days, calculate signed day differences, and find Hebrew weekdays without timezones (`addHebrewDays`, `daysBetweenHebrewDates`, `getHebrewWeekday`).
 - Create structured seven-column Hebrew month grids with civil Gregorian dates, holiday overlays, and localized names (`getHebrewMonthCalendar`).
-- Export selected traditional observances as all-day iCalendar (.ics) entries for calendar apps, with UTF-8 line folding and stable event IDs (`exportJewishHolidaysIcs`).
+- Export a whole Hebrew year or a bounded, filtered Gregorian date range as all-day iCalendar (.ics) entries, with UTF-8 line folding and the same stable event IDs (`exportJewishHolidaysIcs`, `exportJewishHolidaysInRangeIcs`).
 - Run offline, with no runtime or development npm dependencies.
 
 ## Quick start
@@ -34,6 +34,7 @@ node examples/holiday-range.mjs
 node examples/numerals.mjs
 node examples/month-calendar.mjs
 node examples/export-ics.mjs > holidays-5787.ics
+node examples/export-range-ics.mjs > selected-holidays.ics
 ```
 
 The package provides a root ES module export (`hebrew-date-kit`), so the examples can import the package from within the checked-out repository without running `npm install`. The repository is public; no claim of an npm registry release is made here.
@@ -55,6 +56,7 @@ import {
   getHebrewWeekday,
   getHebrewMonthCalendar,
   exportJewishHolidaysIcs,
+  exportJewishHolidaysInRangeIcs,
 } from 'hebrew-date-kit';
 
 // January=1 for Gregorian months; Nisan=1, Tishrei=7 for Hebrew months.
@@ -113,6 +115,15 @@ const ics = exportJewishHolidaysIcs(5787, {
   dtstamp: '20261113T175700Z', // optional; fixes the output for reproducibility
 });
 // iCalendar text, starting with 'BEGIN:VCALENDAR\r\n'
+
+// Export only observances in a civil interval, with optional event-type filters.
+const selectedIcs = exportJewishHolidaysInRangeIcs(
+  {year: 2026, month: 9, day: 10},
+  {year: 2026, month: 9, day: 25},
+  {region: 'israel', locale: 'he', types: ['yom_tov', 'fast'],
+   dtstamp: '20261113T175700Z'},
+);
+// Save selectedIcs as a UTF-8 .ics file. Event UIDs match whole-year exports.
 ```
 
 ### Calendar conventions and limits
@@ -128,6 +139,8 @@ const ics = exportJewishHolidaysIcs(5787, {
 - `addHebrewDays(date, days)` accepts signed safe integers, including zero; the result must remain within Hebrew calendar years 1–20000 (the full Hebrew date-arithmetic range, not limited to Gregorian years 1–9999). `daysBetweenHebrewDates(start, end)` returns *end minus start*. `getHebrewWeekday(date)` returns Sunday=0, Monday=1, ..., Saturday/Shabbat=6. Arithmetic uses only integer absolute days and does not mutate input records.
 - `getHebrewMonthCalendar(year, month, {region, locale='en', weekStartsOn=0})` builds complete seven-cell weeks (`weeks`) for a month, with `null` cells before/after the month. Each populated cell has `hebrewDate`, `gregorianDate`, `weekday`, and `holidays` (an array of `{id,name,type,dayOfFestival?}`). The result also contains `monthName` and `daysInMonth`. `weekStartsOn` accepts weekdays 0–6 (Sunday=0), `region` is required (`israel` or `diaspora`), and `locale` is `en` or `he`. As with the holidays API, the *entire Hebrew year* must be within proleptic Gregorian years 1–9999. Out-of-month cells are deliberately left empty instead of returning adjacent-year dates.
 - `exportJewishHolidaysIcs(year, {region, locale='en', dtstamp})` creates a UTF-8 iCalendar VCALENDAR string with `\r\n` line endings. It exports one all-day `VEVENT` per source holiday, preserving events that overlap; events carry stable `UID`, `DTSTAMP`, Gregorian `DTSTART;VALUE=DATE`, localized `SUMMARY` and `DESCRIPTION`, and `TRANSP:TRANSPARENT`. `DTEND` is omitted, giving a one-day civil duration under RFC 5545. Without `dtstamp` the exporter uses current UTC time **only for metadata**; pass a valid UTC basic timestamp `YYYYMMDDTHHMMSSZ` for repeatable output. These are **civil-day** events, not events beginning at local sunset and not timed observances. Save the string as a UTF-8 `.ics` file or run the example with output redirected to a file.
+
+ - `exportJewishHolidaysInRangeIcs(start, end, {region, locale='en', types, dtstamp})` exports only traditional observances matching an inclusive Gregorian civil-date interval. It inherits the range API's 1830-day bound, allowed event categories and full-year representability limits. Events have the **same stable UIDs** as a whole-year export, so overlapping calendar imports can match them. Even a zero-match interval generates a valid VCALENDAR with no VEVENTs. It accepts the same optional reproducible UTC `dtstamp` and uses civil all-day `DATE` fields, never sunset-based timestamps. This is an export, not a source of halachic times.
 
 ## Run tests
 
@@ -150,7 +163,7 @@ src/
   holidays.js         # Regional holiday and fast-day rules
   holiday-range.js    # Inclusive Gregorian date-range queries over holidays
   month-calendar.js   # Month grids with holiday overlays
-  icalendar.js        # All-day iCalendar export for holidays
+  icalendar.js        # All-day iCalendar export for years or civil ranges
   numerals.mjs        # Hebrew numerals and year formatting
   index.js            # Public ES module entry point
 examples/

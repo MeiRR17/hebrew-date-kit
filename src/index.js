@@ -88,4 +88,4 @@ export { getHebrewMonthCalendar } from './month-calendar.js';
  * file with Israel/diaspora options, localization and UTC metadata.
  * @see {@link ./icalendar.js}
  */
-export { exportJewishHolidaysIcs } from './icalendar.js';
+export { exportJewishHolidaysIcs, exportJewishHolidaysInRangeIcs } from './icalendar.js';

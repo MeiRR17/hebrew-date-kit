@@ -6,6 +6,7 @@
  * or timezone interpretation are needed for DATE-valued DTSTART.
  */
 import {getJewishHolidays} from './holidays.js';
+import {getJewishHolidaysInRange} from './holiday-range.js';
 import {formatHebrewDate} from './format.js';
 
 const encoder = new TextEncoder();
@@ -60,35 +61,15 @@ function icsDate({year, month, day}) {
 }
 
 /**
- * Export all listed traditional Jewish holidays for one Hebrew year
- * as an RFC 5545 iCalendar VCALENDAR with individual all-day VEVENTs.
- *
- * Each VEVENT contains UID, DTSTAMP, DTSTART;VALUE=DATE, SUMMARY,
- * DESCRIPTION, and TRANSP:TRANSPARENT. DTSTART is the Gregorian civil
- * day corresponding to the observed Hebrew date; a missing DTEND means
- * an all-day duration of exactly one civil day (RFC 5545).
- *
- * Holiday/event IDs remain distinct on overlapping dates. UID values are
- * stable across exports for a given event and region. The default DTSTAMP
- * uses the current UTC time *for calendar metadata only*; pass a fixed
- * {dtstamp:'20261113T000000Z'} to obtain reproducible byte-identical output.
- *
- * @param {number} hebrewYear Hebrew year within the Gregorian range supported by getJewishHolidays.
- * @param {{region:'israel'|'diaspora',locale?:'en'|'he',dtstamp?:string}} options Region, optional language and UTC creation/revision stamp.
- * @returns {string} UTF-8 iCalendar text with CRLF line endings, suitable for saving as an .ics file.
- * @throws {TypeError|RangeError} Invalid year, region, language or stamp.
+ * Shared RFC 5545 serializer for either a Hebrew year or a civil-date subset.
+ * The UID intentionally depends on the source event, absolute day and region,
+ * not on the chosen export range, so importing overlapping exports deduplicates.
  */
-export function exportJewishHolidaysIcs(hebrewYear, options) {
-  if (options === null || typeof options !== 'object' || Array.isArray(options)) {
-    throw new TypeError('options must be an object with region');
-  }
-  const {region, locale = 'en', dtstamp} = options;
-  // getJewishHolidays performs strict region, locale, year and range checks.
-  const events = getJewishHolidays(hebrewYear, {region, locale});
+function serializeHolidayEvents(events, {region, locale, dtstamp, label}) {
   const stamp = dtstamp === undefined ? utcTimestamp(new Date()) : validateStamp(dtstamp);
-  const label = locale === 'he'
-    ? 'מועדים ' + hebrewYear + ' (' + (region === 'israel' ? 'ישראל' : 'תפוצות') + ')'
-    : 'Jewish Holidays ' + hebrewYear + ' (' + (region === 'israel' ? 'Israel' : 'Diaspora') + ')';
+  const regionLabel = locale === 'he'
+    ? (region === 'israel' ? 'ישראל' : 'תפוצות')
+    : (region === 'israel' ? 'Israel' : 'Diaspora');
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
@@ -97,9 +78,6 @@ export function exportJewishHolidaysIcs(hebrewYear, options) {
     'X-WR-CALNAME:' + escapeText(label),
   ];
   for (const event of events) {
-    const regionLabel = locale === 'he'
-      ? (region === 'israel' ? 'ישראל' : 'תפוצות')
-      : (region === 'israel' ? 'Israel' : 'Diaspora');
     const description = (locale === 'he' ? 'תאריך עברי: ' : 'Hebrew date: ') +
       formatHebrewDate(event.hebrewDate, {locale}) + '\n' +
       (locale === 'he' ? 'אזור: ' : 'Region: ') + regionLabel + '\n' +
@@ -117,4 +95,50 @@ export function exportJewishHolidaysIcs(hebrewYear, options) {
   }
   lines.push('END:VCALENDAR');
   return lines.map(foldLine).join('\r\n') + '\r\n';
+}
+
+/**
+ * Export one Hebrew year's traditional observances as RFC 5545 all-day
+ * civil-date VEVENTs. This retains the original yearly API and UID scheme.
+ * A fixed UTC dtstamp supports reproducible exports.
+ */
+export function exportJewishHolidaysIcs(hebrewYear, options) {
+  if (options === null || typeof options !== 'object' || Array.isArray(options)) {
+    throw new TypeError('options must be an object with region');
+  }
+  const {region, locale = 'en', dtstamp} = options;
+  const events = getJewishHolidays(hebrewYear, {region, locale});
+  const label = locale === 'he'
+    ? 'מועדים ' + hebrewYear + ' (' + (region === 'israel' ? 'ישראל' : 'תפוצות') + ')'
+    : 'Jewish Holidays ' + hebrewYear + ' (' + (region === 'israel' ? 'Israel' : 'Diaspora') + ')';
+  return serializeHolidayEvents(events, {region, locale, dtstamp, label});
+}
+
+/**
+ * Export only matching traditional observances within an INCLUSIVE Gregorian
+ * civil-date range, crossing Hebrew years when needed. Optional types select
+ * source event categories; multiple events on one day remain separate.
+ *
+ * Uses the same event UIDs, escaping, UTF-8 folding and all-day DATE semantics
+ * as the yearly export, without local time zones or sunset calculation.
+ * Range validation, regional calendars and the 1830-day cap are inherited
+ * from getJewishHolidaysInRange.
+ *
+ * @param {{year:number,month:number,day:number}} start Gregorian date.
+ * @param {{year:number,month:number,day:number}} end Gregorian date.
+ * @param {{region:'israel'|'diaspora',locale?:'en'|'he',types?:string[],dtstamp?:string}} options
+ * @returns {string} UTF-8 iCalendar text with CRLF line endings.
+ */
+export function exportJewishHolidaysInRangeIcs(start, end, options) {
+  if (options === null || typeof options !== 'object' || Array.isArray(options)) {
+    throw new TypeError('options must be an object with region');
+  }
+  const {region, locale = 'en', types, dtstamp} = options;
+  const events = getJewishHolidaysInRange(start, end, {region, locale, types});
+  const label = locale === 'he'
+    ? 'מועדים ' + icsDate(start) + '–' + icsDate(end) +
+      ' (' + (region === 'israel' ? 'ישראל' : 'תפוצות') + ')'
+    : 'Jewish Holidays ' + icsDate(start) + '-' + icsDate(end) +
+      ' (' + (region === 'israel' ? 'Israel' : 'Diaspora') + ')';
+  return serializeHolidayEvents(events, {region, locale, dtstamp, label});
 }
