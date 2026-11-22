@@ -27,6 +27,13 @@ export { toGregorian } from './dates.js';
 export { getJewishHolidays } from './holidays.js';
 
 /**
+ * Query selected traditional observances within an inclusive Gregorian civil
+ * date range, with regional and type filtering across Hebrew year boundaries.
+ * @see {@link ./holiday-range.js}
+ */
+export { getJewishHolidaysInRange } from './holiday-range.js';
+
+/**
  * Format a positive integer as a Hebrew numeral with geresh/gershayim.
  * @see {@link ./numerals.mjs}
  */
