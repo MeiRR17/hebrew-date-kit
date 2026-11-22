@@ -13,6 +13,7 @@ Date conversion and holiday rules often get mixed with timezone-sensitive `Date`
 - Convert Gregorian dates to Hebrew dates and back (`toHebrew`, `toGregorian`).
 - Handle Hebrew leap years, Adar I/II, Gregorian leap days, and Hebrew year boundaries.
 - List traditional holidays and observances for a Hebrew year (`getJewishHolidays`), including regional differences for Pesach, Shavuot, and Simchat Torah, postponements of traditional fasts, and optional Hebrew event names (`locale: 'he'`).
+- Query selected observances **between two inclusive Gregorian dates**, including Hebrew new-year crossings, with region, locale and event-type filters (`getJewishHolidaysInRange`).
 - Format positive integers and Hebrew years with geresh/gershayim and the special forms for 15 and 16 (`formatHebrewNumber`, `formatHebrewYear`).
 - Get Hebrew month names in English or Hebrew and format complete Hebrew civil dates, including Adar I/II (`getHebrewMonthName`, `formatHebrewDate`).
 - Add or subtract days, calculate signed day differences, and find Hebrew weekdays without timezones (`addHebrewDays`, `daysBetweenHebrewDates`, `getHebrewWeekday`).
@@ -29,6 +30,7 @@ git clone https://github.com/MeiRR17/hebrew-date-kit.git
 cd hebrew-date-kit
 node examples/date-conversion.mjs
 node examples/holidays.mjs
+node examples/holiday-range.mjs
 node examples/numerals.mjs
 node examples/month-calendar.mjs
 node examples/export-ics.mjs > holidays-5787.ics
@@ -43,6 +45,7 @@ import {
   toHebrew,
   toGregorian,
   getJewishHolidays,
+  getJewishHolidaysInRange,
   formatHebrewNumber,
   formatHebrewYear,
   getHebrewMonthName,
@@ -65,6 +68,14 @@ const israel = getJewishHolidays(5787, { region: 'israel' });
 const diaspora = getJewishHolidays(5787, { region: 'diaspora' });
 const hebrewNames = getJewishHolidays(5787, { region: 'israel', locale: 'he' });
 // hebrewNames[0].name === 'ראש השנה'
+const aroundNewYear = getJewishHolidaysInRange(
+  {year: 2026, month: 9, day: 10},
+  {year: 2026, month: 9, day: 25},
+  {region: 'israel', locale: 'he', types: ['yom_tov', 'fast']},
+);
+// Finds Rosh Hashanah, Fast of Gedaliah and Yom Kippur across 5786 → 5787.
+// Multiple observances on the same day remain separate event records.
+
 const simchatTorahInIsrael = israel.find(event => event.id === 'simchat_torah');
 // simchatTorahInIsrael.hebrewDate = { year: 5787, month: 7, day: 22 }
 
@@ -110,6 +121,7 @@ const ics = exportJewishHolidaysIcs(5787, {
 - Gregorian month numbers are January=1 through December=12, using the proleptic Gregorian calendar (years 1–9999). Hebrew month numbers start at Nisan=1, so Tishrei=7, Adar=12, and Adar II=13 only in leap years. Months are returned as numbers, not translated month names.
 - An absolute day is an integer with Gregorian **0001-01-01 = 1**. The two public conversion functions reject impossible dates. Hebrew-to-Gregorian conversion requires a representable Gregorian date in years 1–9999.
 - `getJewishHolidays(year, { region, locale })` requires `region` to be exactly `'israel'` or `'diaspora'`; optional `locale` is `'en'` (default) or `'he'` for Hebrew display names. Only `name` is localized; identifiers, date fields, event types, and sorting are identical. It returns chronologically sorted events with `id`, `name`, `type`, `hebrewDate`, `gregorianDate`, and `absoluteDay`; multi-day festivals also have `dayOfFestival`. The entire requested Hebrew year must be within the supported Gregorian range.
+- `getJewishHolidaysInRange(start, end, {region, locale='en', types})` accepts **two Gregorian civil-date objects** (`year`, `month`, `day`), includes **both endpoints**, and returns the same event objects, sorted by absolute day. It can cross Hebrew year boundaries. An optional nonempty `types` array selects distinct values from `'yom_tov'`, `'chol_hamoed'`, `'fast'`, `'observance'`. Omitting it includes all types. A single day can return multiple events, and a range with no matching observances returns `[]`. A reversed interval or one longer than **1830 inclusive days** raises `RangeError`. The underlying year-level holiday engine requires **each intersecting Hebrew year in its entirety** to fit Gregorian years 1–9999; requests near the lower/upper calendar boundary can therefore fail even when the individual civil dates are valid. There are no network calls, date-time objects, sunset calculations, DST rules or modern state holidays.
 - This list represents selected traditional observances, **not** a comprehensive halachic calendar or a source of religious rulings. Modern state holidays and location-based times are not included.
 - Hebrew numerals use traditional punctuation. `formatHebrewNumber(5787)` preserves the thousands prefix, whereas `formatHebrewYear(5787)` omits it. The supported input range for these functions is 1–999999.
 - `getHebrewMonthName(year, month, {locale})` uses English by default; `formatHebrewDate({year,month,day}, {locale})` uses Hebrew by default. Both accept `locale: 'en' | 'he'`. Date formatting validates the complete date, including variable Hebrew month lengths. These are display functions only; they do not parse text or calculate sunset.
@@ -136,6 +148,7 @@ src/
   dates.js            # Date conversion functions
   format.js           # Month names and formatted Hebrew dates
   holidays.js         # Regional holiday and fast-day rules
+  holiday-range.js    # Inclusive Gregorian date-range queries over holidays
   month-calendar.js   # Month grids with holiday overlays
   icalendar.js        # All-day iCalendar export for holidays
   numerals.mjs        # Hebrew numerals and year formatting
@@ -143,6 +156,7 @@ src/
 examples/
   date-conversion.mjs
   holidays.mjs
+  holiday-range.mjs
   numerals.mjs
   month-calendar.mjs
   export-ics.mjs
@@ -154,3 +168,7 @@ LICENSE               # MIT
 ## Author
 
 Built by Meir Dvir · [https://github.com/MeiRR17](https://github.com/MeiRR17)
+
+### v1.6.0 development milestone
+
+The new holiday-range query is an **additive library API**, not an npm publication or a claim of validated release status. It delegates to existing annual observance rules and does not infer halachic start/end times from civil dates. Development was code-only; automated tests, runtime examples and cross-version compatibility checks were deliberately left for the owner's consolidated acceptance cycle.
