@@ -13,11 +13,12 @@ Date conversion and holiday rules often get mixed with timezone-sensitive `Date`
 - Convert Gregorian dates to Hebrew dates and back (`toHebrew`, `toGregorian`).
 - Handle Hebrew leap years, Adar I/II, Gregorian leap days, and Hebrew year boundaries.
 - List traditional holidays and observances for a Hebrew year (`getJewishHolidays`), including regional differences for Pesach, Shavuot, and Simchat Torah, postponements of traditional fasts, and optional Hebrew event names (`locale: 'he'`).
+- Query selected observances **between two inclusive Gregorian dates**, including Hebrew new-year crossings, with region, locale and event-type filters (`getJewishHolidaysInRange`).
 - Format positive integers and Hebrew years with geresh/gershayim and the special forms for 15 and 16 (`formatHebrewNumber`, `formatHebrewYear`).
 - Get Hebrew month names in English or Hebrew and format complete Hebrew civil dates, including Adar I/II (`getHebrewMonthName`, `formatHebrewDate`).
 - Add or subtract days, calculate signed day differences, and find Hebrew weekdays without timezones (`addHebrewDays`, `daysBetweenHebrewDates`, `getHebrewWeekday`).
 - Create structured seven-column Hebrew month grids with civil Gregorian dates, holiday overlays, and localized names (`getHebrewMonthCalendar`).
-- Export selected traditional observances as all-day iCalendar (.ics) entries for calendar apps, with UTF-8 line folding and stable event IDs (`exportJewishHolidaysIcs`).
+- Export a whole Hebrew year or a bounded, filtered Gregorian date range as all-day iCalendar (.ics) entries, with UTF-8 line folding and the same stable event IDs (`exportJewishHolidaysIcs`, `exportJewishHolidaysInRangeIcs`).
 - Run offline, with no runtime or development npm dependencies.
 
 ## Quick start
@@ -29,9 +30,11 @@ git clone https://github.com/MeiRR17/hebrew-date-kit.git
 cd hebrew-date-kit
 node examples/date-conversion.mjs
 node examples/holidays.mjs
+node examples/holiday-range.mjs
 node examples/numerals.mjs
 node examples/month-calendar.mjs
 node examples/export-ics.mjs > holidays-5787.ics
+node examples/export-range-ics.mjs > selected-holidays.ics
 ```
 
 The package provides a root ES module export (`hebrew-date-kit`), so the examples can import the package from within the checked-out repository without running `npm install`. The repository is public; no claim of an npm registry release is made here.
@@ -43,6 +46,7 @@ import {
   toHebrew,
   toGregorian,
   getJewishHolidays,
+  getJewishHolidaysInRange,
   formatHebrewNumber,
   formatHebrewYear,
   getHebrewMonthName,
@@ -52,6 +56,7 @@ import {
   getHebrewWeekday,
   getHebrewMonthCalendar,
   exportJewishHolidaysIcs,
+  exportJewishHolidaysInRangeIcs,
 } from 'hebrew-date-kit';
 
 // January=1 for Gregorian months; Nisan=1, Tishrei=7 for Hebrew months.
@@ -65,6 +70,14 @@ const israel = getJewishHolidays(5787, { region: 'israel' });
 const diaspora = getJewishHolidays(5787, { region: 'diaspora' });
 const hebrewNames = getJewishHolidays(5787, { region: 'israel', locale: 'he' });
 // hebrewNames[0].name === 'ראש השנה'
+const aroundNewYear = getJewishHolidaysInRange(
+  {year: 2026, month: 9, day: 10},
+  {year: 2026, month: 9, day: 25},
+  {region: 'israel', locale: 'he', types: ['yom_tov', 'fast']},
+);
+// Finds Rosh Hashanah, Fast of Gedaliah and Yom Kippur across 5786 → 5787.
+// Multiple observances on the same day remain separate event records.
+
 const simchatTorahInIsrael = israel.find(event => event.id === 'simchat_torah');
 // simchatTorahInIsrael.hebrewDate = { year: 5787, month: 7, day: 22 }
 
@@ -102,6 +115,15 @@ const ics = exportJewishHolidaysIcs(5787, {
   dtstamp: '20261113T175700Z', // optional; fixes the output for reproducibility
 });
 // iCalendar text, starting with 'BEGIN:VCALENDAR\r\n'
+
+// Export only observances in a civil interval, with optional event-type filters.
+const selectedIcs = exportJewishHolidaysInRangeIcs(
+  {year: 2026, month: 9, day: 10},
+  {year: 2026, month: 9, day: 25},
+  {region: 'israel', locale: 'he', types: ['yom_tov', 'fast'],
+   dtstamp: '20261113T175700Z'},
+);
+// Save selectedIcs as a UTF-8 .ics file. Event UIDs match whole-year exports.
 ```
 
 ### Calendar conventions and limits
@@ -110,12 +132,15 @@ const ics = exportJewishHolidaysIcs(5787, {
 - Gregorian month numbers are January=1 through December=12, using the proleptic Gregorian calendar (years 1–9999). Hebrew month numbers start at Nisan=1, so Tishrei=7, Adar=12, and Adar II=13 only in leap years. Months are returned as numbers, not translated month names.
 - An absolute day is an integer with Gregorian **0001-01-01 = 1**. The two public conversion functions reject impossible dates. Hebrew-to-Gregorian conversion requires a representable Gregorian date in years 1–9999.
 - `getJewishHolidays(year, { region, locale })` requires `region` to be exactly `'israel'` or `'diaspora'`; optional `locale` is `'en'` (default) or `'he'` for Hebrew display names. Only `name` is localized; identifiers, date fields, event types, and sorting are identical. It returns chronologically sorted events with `id`, `name`, `type`, `hebrewDate`, `gregorianDate`, and `absoluteDay`; multi-day festivals also have `dayOfFestival`. The entire requested Hebrew year must be within the supported Gregorian range.
+- `getJewishHolidaysInRange(start, end, {region, locale='en', types})` accepts **two Gregorian civil-date objects** (`year`, `month`, `day`), includes **both endpoints**, and returns the same event objects, sorted by absolute day. It can cross Hebrew year boundaries. An optional nonempty `types` array selects distinct values from `'yom_tov'`, `'chol_hamoed'`, `'fast'`, `'observance'`. Omitting it includes all types. A single day can return multiple events, and a range with no matching observances returns `[]`. A reversed interval or one longer than **1830 inclusive days** raises `RangeError`. The underlying year-level holiday engine requires **each intersecting Hebrew year in its entirety** to fit Gregorian years 1–9999; requests near the lower/upper calendar boundary can therefore fail even when the individual civil dates are valid. There are no network calls, date-time objects, sunset calculations, DST rules or modern state holidays.
 - This list represents selected traditional observances, **not** a comprehensive halachic calendar or a source of religious rulings. Modern state holidays and location-based times are not included.
 - Hebrew numerals use traditional punctuation. `formatHebrewNumber(5787)` preserves the thousands prefix, whereas `formatHebrewYear(5787)` omits it. The supported input range for these functions is 1–999999.
 - `getHebrewMonthName(year, month, {locale})` uses English by default; `formatHebrewDate({year,month,day}, {locale})` uses Hebrew by default. Both accept `locale: 'en' | 'he'`. Date formatting validates the complete date, including variable Hebrew month lengths. These are display functions only; they do not parse text or calculate sunset.
 - `addHebrewDays(date, days)` accepts signed safe integers, including zero; the result must remain within Hebrew calendar years 1–20000 (the full Hebrew date-arithmetic range, not limited to Gregorian years 1–9999). `daysBetweenHebrewDates(start, end)` returns *end minus start*. `getHebrewWeekday(date)` returns Sunday=0, Monday=1, ..., Saturday/Shabbat=6. Arithmetic uses only integer absolute days and does not mutate input records.
 - `getHebrewMonthCalendar(year, month, {region, locale='en', weekStartsOn=0})` builds complete seven-cell weeks (`weeks`) for a month, with `null` cells before/after the month. Each populated cell has `hebrewDate`, `gregorianDate`, `weekday`, and `holidays` (an array of `{id,name,type,dayOfFestival?}`). The result also contains `monthName` and `daysInMonth`. `weekStartsOn` accepts weekdays 0–6 (Sunday=0), `region` is required (`israel` or `diaspora`), and `locale` is `en` or `he`. As with the holidays API, the *entire Hebrew year* must be within proleptic Gregorian years 1–9999. Out-of-month cells are deliberately left empty instead of returning adjacent-year dates.
 - `exportJewishHolidaysIcs(year, {region, locale='en', dtstamp})` creates a UTF-8 iCalendar VCALENDAR string with `\r\n` line endings. It exports one all-day `VEVENT` per source holiday, preserving events that overlap; events carry stable `UID`, `DTSTAMP`, Gregorian `DTSTART;VALUE=DATE`, localized `SUMMARY` and `DESCRIPTION`, and `TRANSP:TRANSPARENT`. `DTEND` is omitted, giving a one-day civil duration under RFC 5545. Without `dtstamp` the exporter uses current UTC time **only for metadata**; pass a valid UTC basic timestamp `YYYYMMDDTHHMMSSZ` for repeatable output. These are **civil-day** events, not events beginning at local sunset and not timed observances. Save the string as a UTF-8 `.ics` file or run the example with output redirected to a file.
+
+ - `exportJewishHolidaysInRangeIcs(start, end, {region, locale='en', types, dtstamp})` exports only traditional observances matching an inclusive Gregorian civil-date interval. It inherits the range API's 1830-day bound, allowed event categories and full-year representability limits. Events have the **same stable UIDs** as a whole-year export, so overlapping calendar imports can match them. Even a zero-match interval generates a valid VCALENDAR with no VEVENTs. It accepts the same optional reproducible UTC `dtstamp` and uses civil all-day `DATE` fields, never sunset-based timestamps. This is an export, not a source of halachic times.
 
 ## Run tests
 
@@ -136,13 +161,15 @@ src/
   dates.js            # Date conversion functions
   format.js           # Month names and formatted Hebrew dates
   holidays.js         # Regional holiday and fast-day rules
+  holiday-range.js    # Inclusive Gregorian date-range queries over holidays
   month-calendar.js   # Month grids with holiday overlays
-  icalendar.js        # All-day iCalendar export for holidays
+  icalendar.js        # All-day iCalendar export for years or civil ranges
   numerals.mjs        # Hebrew numerals and year formatting
   index.js            # Public ES module entry point
 examples/
   date-conversion.mjs
   holidays.mjs
+  holiday-range.mjs
   numerals.mjs
   month-calendar.mjs
   export-ics.mjs
@@ -154,3 +181,7 @@ LICENSE               # MIT
 ## Author
 
 Built by Meir Dvir · [https://github.com/MeiRR17](https://github.com/MeiRR17)
+
+### v1.6.0 development milestone
+
+The new holiday-range query is an **additive library API**, not an npm publication or a claim of validated release status. It delegates to existing annual observance rules and does not infer halachic start/end times from civil dates. Development was code-only; automated tests, runtime examples and cross-version compatibility checks were deliberately left for the owner's consolidated acceptance cycle.
